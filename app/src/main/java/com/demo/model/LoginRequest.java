@@ -1,26 +1,35 @@
 
 package com.demo.model;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 public class LoginRequest {
 
-    @SerializedName("imonumber")
-    @Expose
-    private String imonumber;
-    @SerializedName("password")
-    @Expose
+
+    /**
+     * username : develxxoper
+     * email : qa4dexv@gmail.com
+     * password : 123456
+     * mobile_number : 1234567891
+     */
+
+    private String username;
+    private String email;
     private String password;
-    @SerializedName("user_id")
-    @Expose
-    private String userId;
-    public String getImonumber() {
-        return imonumber;
+    private String mobile_number;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setImonumber(String imonumber) {
-        this.imonumber = imonumber;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -30,11 +39,12 @@ public class LoginRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-    public String getUserId() {
-        return userId;
+
+    public String getMobile_number() {
+        return mobile_number;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setMobile_number(String mobile_number) {
+        this.mobile_number = mobile_number;
     }
 }

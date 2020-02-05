@@ -22,4 +22,8 @@
     <string name="fbSignup">Sign Up with Facebook</string>
     <string name="enteremail">Enter Your Email</string>
     <string name="next">Next</string>
+
+
+    <string name="facebook_app_id">806407589874006</string>
+    <string name="fb_login_protocol_scheme">fb806407589874006</string>
 </resources>

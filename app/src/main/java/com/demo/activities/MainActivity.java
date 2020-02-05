@@ -17,7 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-import com.demo.R;
+import com.demo.marklaw.R;
 import com.demo.model.DataModel;
 import com.demo.model.DrawerItemCustomAdapter;
 

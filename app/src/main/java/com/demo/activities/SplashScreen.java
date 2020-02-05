@@ -2,18 +2,25 @@ package com.demo.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Base64;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.widget.ProgressBar;
 
 import androidx.databinding.DataBindingUtil;
 
-import com.demo.R;
-import com.demo.databinding.SplashScreenBinding;
-import com.demo.utility.TinyDB;
+import com.demo.marklaw.databinding.SplashScreenBinding;
+import com.demo.marklaw.R;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import static android.content.ContentValues.TAG;
 
 
 public class SplashScreen extends Activity {
@@ -26,13 +33,13 @@ public class SplashScreen extends Activity {
     protected boolean _active = true;
     protected int _splashTime = 1;/*500*/
     SplashScreenBinding binding;
-    Animation anim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.splash_screen);
         ac = SplashScreen.this;
+        genereatekey();
 
         // animation of logo
 
@@ -66,6 +73,24 @@ public class SplashScreen extends Activity {
         splashTread.start();
 
         progMethod();
+    }
+
+    private void genereatekey() {
+        try {
+            PackageInfo info = ac.getPackageManager().getPackageInfo(ac.getPackageName(), PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String hashKey = new String(Base64.encode(md.digest(), 0));
+
+
+                Log.e("keyhash", "printHashKey() Hash Key: " + hashKey);
+            }
+        } catch (NoSuchAlgorithmException e) {
+            Log.e(TAG, "printHashKey()", e);
+        } catch (Exception e) {
+            Log.e(TAG, "printHashKey()", e);
+        }
     }
 
     public void progMethod() {

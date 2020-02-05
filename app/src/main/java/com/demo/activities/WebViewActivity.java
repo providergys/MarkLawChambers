@@ -9,7 +9,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
-import com.demo.R;
+import com.demo.marklaw.R;
+
 
 public class WebViewActivity extends AppCompatActivity {
 

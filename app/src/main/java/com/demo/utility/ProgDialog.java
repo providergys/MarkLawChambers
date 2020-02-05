@@ -6,7 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 
 import androidx.core.content.ContextCompat;
 
-import com.demo.R;
+import com.demo.marklaw.R;
 
 
 /**
@@ -23,7 +23,7 @@ public class ProgDialog {
         progress.setMessage("Please wait...");
         //progress.setMessage().C;
         progress.setInverseBackgroundForced( true );
-        progress.getWindow().setBackgroundDrawable( new ColorDrawable( ContextCompat.getColor( ac, R.color.colorPrimary)));
+        progress.getWindow().setBackgroundDrawable( new ColorDrawable( ContextCompat.getColor( ac, R.color.colorWhite)));
         progress.setProgressStyle( ProgressDialog.STYLE_SPINNER );
         progress.setIndeterminate( true );
         progress.setCancelable(false);

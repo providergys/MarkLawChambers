@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.demo.R;
+import com.demo.marklaw.R;
 import com.demo.model.ProductAdapter;
 
 import java.util.ArrayList;

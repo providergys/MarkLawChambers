@@ -19,12 +19,6 @@ import retrofit2.http.POST;
 
 
 public interface ApiCalls {
-
-
-    @POST("apilogin")
+    @POST("signup")
     Call<LoginResponse> loginMethod(@Header("Content-Type") String contenttype, @Body LoginRequest loginRequest);
-
-
 }
-
-

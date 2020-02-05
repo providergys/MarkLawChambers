@@ -10,8 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.basgeekball.awesomevalidation.AwesomeValidation;
-import com.demo.R;
-import com.demo.databinding.ActivityForgotPassBinding;
+import com.demo.marklaw.databinding.ActivityForgotPassBinding;
+import com.demo.marklaw.R;
 
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 

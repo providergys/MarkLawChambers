@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.demo.R;
+import com.demo.marklaw.R;
 import com.google.android.material.snackbar.Snackbar;
 
 

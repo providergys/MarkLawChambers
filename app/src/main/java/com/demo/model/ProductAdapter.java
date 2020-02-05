@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.demo.R;
 import com.demo.activities.ProductDetail;
+import com.demo.marklaw.R;
 
 import java.util.ArrayList;
 

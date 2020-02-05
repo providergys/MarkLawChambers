@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.demo"
+        applicationId "com.demo.marklaw"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
@@ -40,4 +40,7 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
     implementation 'com.intuit.ssp:ssp-android:1.0.6'
     implementation 'com.basgeekball:awesome-validation:4.2'
+    //implementation files('facebook-android-sdk-4.42.0.jar')
+
+    implementation 'com.facebook.android:facebook-login:5.15.3'
 }
