@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Mark Law Chambers</string>
+    <string name="signin">Sign in</string>
+    <string name="or">-OR-</string>
+    <string name="fbLogin">Login with Facebook</string>
+    <string name="dont">Don\'t have an account? <font color='red'>Sign Up</font></string>
+
+
+    //
+    <string name="hello_world"><font color='red'>Hello world!</font></string>
+    <string name="forgot">forgot password?</string>
+    <string name="email">Email Address</string>
+    <string name="pass">Password</string>
+    <string name="invalid_email">Invalid Email Address</string>
+    <string name="invalid_password">Please Enter Password</string>
+    <string name="already">Already Member ? <font color='red'>Login</font></string>
+    <string name="signup">Sign Up</string>
+    <string name="phone">Phone Number</string>
+    <string name="name">Username</string>
+    <string name="invalid_name">Please Enter Name</string>
+    <string name="invalid_number">Please Enter Number</string>
+    <string name="fbSignup">Sign Up with Facebook</string>
+    <string name="enteremail">Enter Your Email</string>
+    <string name="next">Next</string>
+</resources>
