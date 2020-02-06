@@ -15,6 +15,8 @@ public class LoginRequest {
     private String email;
     private String password;
     private String mobile_number;
+    private String socialid;
+    private String logintype;
 
     public String getUsername() {
         return username;
@@ -22,6 +24,22 @@ public class LoginRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getLogintype() {
+        return logintype;
+    }
+
+    public void setLogintype(String logintype) {
+        this.logintype = logintype;
+    }
+
+    public String getSocialid() {
+        return socialid;
+    }
+
+    public void setSocialid(String socialid) {
+        this.socialid = socialid;
     }
 
     public String getEmail() {

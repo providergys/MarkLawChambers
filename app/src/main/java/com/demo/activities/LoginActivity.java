@@ -6,30 +6,32 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
-
-
+import android.widget.Toast;
 import androidx.databinding.DataBindingUtil;
-
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityLoginBinding;
+import com.demo.model.LoginRequest;
+import com.demo.model.LoginResponse;
+import com.demo.model.LoginResponseFb;
+import com.demo.retroutility.MainApplication;
+import com.demo.utility.Constants;
+import com.demo.utility.ProgDialog;
+import com.demo.utility.UserSharedPreferences;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
-import com.facebook.login.Login;
 import com.facebook.login.LoginResult;
-
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class LoginActivity extends Activity {
@@ -38,9 +40,10 @@ public class LoginActivity extends Activity {
     ActivityLoginBinding binding;
     CallbackManager callbackManager;
     String accessToken;
-    private static final String EMAIL = "email";
+    ProgDialog prog = new ProgDialog();
+    UserSharedPreferences mSharedPref;
 
-    @Override
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
@@ -50,6 +53,7 @@ public class LoginActivity extends Activity {
     private void init() {
         ac = LoginActivity.this;
         mAwesomeValidation = new AwesomeValidation(BASIC);
+        mSharedPref=new UserSharedPreferences(ac);
         validations();
         fbData();
 
@@ -63,8 +67,12 @@ public class LoginActivity extends Activity {
         if (!loggedOut) {
             Log.e("hello", "login");
 
+
+
+
         } else {
             Log.e("hello", "logout");
+
         }
         binding.loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -86,15 +94,34 @@ public class LoginActivity extends Activity {
                                     String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
 
-                                    Log.e("first_name", "" + first_name);
-                                    Log.e("last_name", "" + last_name);
-                                    Log.e("email", "" + email);
-                                    Log.e("id", "" + id);
-                                    Log.e("image_url", "" + image_url);
-                                    Log.e("accessToken", "" + accessToken);
+                                    LoginRequest loginRequest = new LoginRequest();
+                                    prog.progDialog(ac);
 
 
-                                    startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                                    loginRequest.setSocialid(id);
+                                    loginRequest.setEmail(email);
+                                    loginRequest.setUsername(first_name);
+                                    loginRequest.setLogintype("A");
+
+                                    MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
+                                        @Override
+                                        public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
+                                            if (response.isSuccessful()) {
+                                                prog.hideProg();
+
+
+                                                Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                                            } else {
+                                                prog.hideProg();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<LoginResponseFb> call, Throwable t) {
+                                            prog.hideProg();
+                                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
 
 
                                 } catch (JSONException e) {
@@ -131,8 +158,7 @@ public class LoginActivity extends Activity {
     public void signBtn(View view) {
         if (mAwesomeValidation.validate()) {
             // Here, we are sure that form is successfully validated. So, do your stuffs now...
-            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-            // retrofitLogin();
+            retrofitLogin();
         }
     }
 
@@ -150,46 +176,49 @@ public class LoginActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    /*public void retrofitLogin() {
-
-
-        LoginRequest loginRequest=new LoginRequest();
-
-        //Show Your Progress Dialog
-
-
+    public void retrofitLogin() {
+        LoginRequest loginRequest = new LoginRequest();
+        prog.progDialog(ac);
+        loginRequest.setUsername(binding.emailEdit.getText().toString());
+        loginRequest.setPassword(binding.passEdit.getText().toString());
 
         MainApplication.getApiService().loginMethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
                 if (response.isSuccessful()) {
-
-
-                    if (response.body().getStatusCode()==200) {
+                    prog.hideProg();
+                    if (response.body().getRespCode().matches("1010")) {
+                        Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        mSharedPref.save(Constants.USER_NAME,response.body().getUser_data().getUsername());
+                        mSharedPref.save(Constants.USER_ID,String.valueOf(response.body().getUser_data().getId()));
+                        mSharedPref.save(Constants.USER_PHONE,response.body().getUser_data().getMobile_number());
+                        mSharedPref.save(Constants.USER_EMAIL,response.body().getUser_data().getUseremail());
+                        mSharedPref.save(Constants.USER_TYPE,response.body().getUser_data().getUsertype());
                         startActivity(new Intent(LoginActivity.this,HomeActivity.class));
 
                     } else {
 
+
+                        Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
                     }
 
                 } else {
-
-
-
-
+                    prog.hideProg();
+                    Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-
+                prog.hideProg();
+                Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
 
 
                 //   snakeBaar.showSnackBar(ac, "Something went wrong..", login_Layout);
 
             }
         });
-    }*/
+    }
 }

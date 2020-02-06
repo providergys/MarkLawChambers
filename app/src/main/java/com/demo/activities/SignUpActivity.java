@@ -2,7 +2,6 @@ package com.demo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,15 +9,17 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
-
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.demo.marklaw.databinding.ActivitySignUpBinding;
 import com.demo.marklaw.R;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
+import com.demo.model.LoginResponseFb;
 import com.demo.retroutility.MainApplication;
+import com.demo.utility.Constants;
 import com.demo.utility.ProgDialog;
+import com.demo.utility.UserSharedPreferences;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -26,16 +27,12 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Arrays;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -45,12 +42,19 @@ public class SignUpActivity extends AppCompatActivity {
     CallbackManager callbackManager;
     String accessToken;
     ProgDialog prog = new ProgDialog();
+    UserSharedPreferences mSharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
+        init();
+
+    }
+
+    private void init() {
         ac = SignUpActivity.this;
         mAwesomeValidation = new AwesomeValidation(BASIC);
+        mSharedPref=new UserSharedPreferences(ac);
         validations();
         fbData();
     }
@@ -62,6 +66,9 @@ public class SignUpActivity extends AppCompatActivity {
         boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
         if (!loggedOut) {
             Log.e("hello", "login");
+
+
+
 
         } else {
             Log.e("hello", "logout");
@@ -85,13 +92,33 @@ public class SignUpActivity extends AppCompatActivity {
                                     String id = object.getString("id");
                                     String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
+                                    LoginRequest loginRequest = new LoginRequest();
+                                    prog.progDialog(ac);
 
-                                    Log.e("first_name", "" + first_name);
-                                    Log.e("last_name", "" + last_name);
-                                    Log.e("email", "" + email);
-                                    Log.e("id", "" + id);
-                                    Log.e("image_url", "" + image_url);
-                                    Log.e("accessToken", "" + accessToken);
+
+
+                                    loginRequest.setSocialid(id);
+                                    loginRequest.setEmail(email);
+                                    loginRequest.setUsername(first_name);
+                                    loginRequest.setLogintype("A");
+
+                                    MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
+                                        @Override
+                                        public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
+                                            if (response.isSuccessful()) {
+                                                prog.hideProg();
+
+                                            } else {
+                                                prog.hideProg();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<LoginResponseFb> call, Throwable t) {
+                                            prog.hideProg();
+                                            Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                                        }
+                                    });
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -133,8 +160,6 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     public void retrofitLogin() {
-
-
         LoginRequest loginRequest = new LoginRequest();
         prog.progDialog(ac);
         loginRequest.setUsername(binding.userNameEdt.getText().toString());
@@ -145,21 +170,23 @@ public class SignUpActivity extends AppCompatActivity {
         //Show Your Progress Dialog
 
 
-        MainApplication.getApiService().loginMethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
+        MainApplication.getApiService().signUpmethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     prog.hideProg();
-
-
-
                     if(response.body().getSuccess().equals("true")){
 
                          Log.e("successtrue",""+response.body().getSuccess());
                          Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                        mSharedPref.save(Constants.USER_NAME,response.body().getUser_data().getUsername());
+                        mSharedPref.save(Constants.USER_ID,String.valueOf(response.body().getUser_data().getId()));
+                        mSharedPref.save(Constants.USER_PHONE,response.body().getUser_data().getMobile_number());
+                        mSharedPref.save(Constants.USER_EMAIL,response.body().getUser_data().getUseremail());
+                        mSharedPref.save(Constants.USER_TYPE,response.body().getUser_data().getUsertype());
+                        startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
+
                     }
-
-
                     else if(response.body().getSuccess().equals("false")){
                         Log.e("successfalse",""+response.body().getSuccess());
 

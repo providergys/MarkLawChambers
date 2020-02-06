@@ -22,8 +22,17 @@
     <string name="fbSignup">Sign Up with Facebook</string>
     <string name="enteremail">Enter Your Email</string>
     <string name="next">Next</string>
-
-
     <string name="facebook_app_id">806407589874006</string>
     <string name="fb_login_protocol_scheme">fb806407589874006</string>
+    <string name="caseup">Case Updates</string>
+    <string name="practice">Our Practice</string>
+    <string name="sharing">Our Sharing</string>
+    <string name="team">Our Team</string>
+    <string name="visit">Visit Our Website</string>
+    <string name="recent">RECENT ACTIVITIES</string>
+    <string name="home">HOME</string>
+    <string name="msg">MESSAGE</string>
+    <string name="reach">REACH US</string>
+    <string name="setting">SETTING</string>
+    <string name="practicearea">Our Practice Area</string>
 </resources>
