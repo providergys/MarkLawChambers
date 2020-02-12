@@ -63,7 +63,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/custom_linear"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:onClick="caseUpdateClick">
 
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
@@ -140,6 +141,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ourTeamLn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_5sdp"
@@ -264,6 +266,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ourTeamwithoutLn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_5sdp"

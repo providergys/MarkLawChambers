@@ -2,6 +2,7 @@ package com.demo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.demo.marklaw.databinding.ActivitySignUpBinding;
@@ -27,12 +29,16 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.Arrays;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -43,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     String accessToken;
     ProgDialog prog = new ProgDialog();
     UserSharedPreferences mSharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
     private void init() {
         ac = SignUpActivity.this;
         mAwesomeValidation = new AwesomeValidation(BASIC);
-        mSharedPref=new UserSharedPreferences(ac);
+        mSharedPref = new UserSharedPreferences(ac);
         validations();
         fbData();
     }
@@ -62,14 +69,9 @@ public class SignUpActivity extends AppCompatActivity {
     private void fbData() {
         callbackManager = CallbackManager.Factory.create();
         binding.loginButton.setPermissions(Arrays.asList("email", "public_profile"));
-
         boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
         if (!loggedOut) {
             Log.e("hello", "login");
-
-
-
-
         } else {
             Log.e("hello", "logout");
         }
@@ -87,27 +89,27 @@ public class SignUpActivity extends AppCompatActivity {
                                 Log.d("TAG", object.toString());
                                 try {
                                     String first_name = object.getString("first_name");
-                                    String last_name = object.getString("last_name");
+                                  //  String last_name = object.getString("last_name");
                                     String email = object.getString("email");
                                     String id = object.getString("id");
-                                    String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
-
+                                  //  String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
                                     LoginRequest loginRequest = new LoginRequest();
                                     prog.progDialog(ac);
-
-
-
                                     loginRequest.setSocialid(id);
                                     loginRequest.setEmail(email);
                                     loginRequest.setUsername(first_name);
                                     loginRequest.setLogintype("A");
-
+                                    loginRequest.setUsertype("Non Client");
                                     MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
                                         @Override
                                         public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
-                                            if (response.isSuccessful()) {
+                                            if (response.body()!=null && response.isSuccessful()) {
                                                 prog.hideProg();
-
+                                                mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
+                                                mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
+                                                mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
+                                                mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
+                                                startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
                                             } else {
                                                 prog.hideProg();
                                             }
@@ -175,37 +177,26 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     prog.hideProg();
-                    if(response.body().getSuccess().equals("true")){
+                    if (response.body()!=null && response.body().getSuccess().equals("true")) {
+                        Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
+                        mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
+                        mSharedPref.save(Constants.USER_PHONE, response.body().getUser_data().getMobile_number());
+                        mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
+                        mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
+                        startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
 
-                         Log.e("successtrue",""+response.body().getSuccess());
-                         Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
-                        mSharedPref.save(Constants.USER_NAME,response.body().getUser_data().getUsername());
-                        mSharedPref.save(Constants.USER_ID,String.valueOf(response.body().getUser_data().getId()));
-                        mSharedPref.save(Constants.USER_PHONE,response.body().getUser_data().getMobile_number());
-                        mSharedPref.save(Constants.USER_EMAIL,response.body().getUser_data().getUseremail());
-                        mSharedPref.save(Constants.USER_TYPE,response.body().getUser_data().getUsertype());
-                        startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
-
-                    }
-                    else if(response.body().getSuccess().equals("false")){
-                        Log.e("successfalse",""+response.body().getSuccess());
-
-                        if (response.body().getRespCode().equals("1009")){
-                            Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
-                        }
-
-
-                        else if (response.body().getRespCode().equals("1002")){
-                            Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    } else if (response.body()!=null && response.body().getSuccess().equals("false")) {
+                        Log.e("successfalse", "" + response.body().getSuccess());
+                        if (response.body().getRespCode().equals("1009")) {
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+                        } else if (response.body().getRespCode().equals("1002")) {
+                            Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                         }
                     }
-
-
-                }
-
-                else {
+                } else {
                     prog.hideProg();
-                    Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
+
 
                 }
             }
@@ -213,7 +204,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 prog.hideProg();
-                Toast.makeText(ac,t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
 
 
                 //   snakeBaar.showSnackBar(ac, "Something went wrong..", login_Layout);

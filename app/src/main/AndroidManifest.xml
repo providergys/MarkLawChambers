@@ -13,7 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.demo.activities.OurPracticeActivity"></activity>
+        <activity android:name="com.demo.activities.OurTeamActivity"></activity>
+        <activity android:name="com.demo.activities.PdfViewActivity" />
+        <activity android:name="com.demo.activities.CaseDetailActivity" />
+        <activity android:name="com.demo.fragment.DocumentsFragment" />
+        <activity android:name="com.demo.fragment.CorrespondanceFragment" />
+        <activity android:name="com.demo.fragment.CaseUpdateFragment" />
+        <activity android:name="com.demo.activities.CaseUpdatesActivity" />
+        <activity android:name="com.demo.activities.OurPracticeActivity" />
         <activity android:name="com.demo.activities.RecentDetailActivity" />
         <activity android:name="com.demo.activities.ForgotPassActivity" />
         <activity android:name="com.demo.activities.HomeActivity" />

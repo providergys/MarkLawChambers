@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/teamProfileImage"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:src="@drawable/aaron"/>
+
+        <TextView
+            android:id="@+id/teamTitleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:text="khhhhhhh"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/teamdescText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:text="khhhhhhh"
+            android:layout_marginTop="@dimen/_2sdp"
+           />
+        <TextView
+            android:id="@+id/teamreadText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Read More"
+            android:textStyle="bold"
+            android:textColor="#EB1B1B"
+            android:layout_marginTop="@dimen/_2sdp"/>
+
+    </LinearLayout>
+</layout>

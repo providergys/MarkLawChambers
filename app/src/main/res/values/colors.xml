@@ -7,5 +7,7 @@
     <color name="colorGrey">#747171</color>
     <color name="colorFbBlue">#4267B2</color>
     <color name="colorYellow">#cda24d</color>
+    <color name="colorRed">#E09E99</color>
+    <color name="colorGreen">#9BE29E</color>
 
 </resources>

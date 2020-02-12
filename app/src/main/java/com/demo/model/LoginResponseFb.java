@@ -8,7 +8,7 @@ public class LoginResponseFb {
      * RespCode : 1010
      * success : true
      * Message : Login Successfully
-     * user_data : {"id":31,"useremail":"qa4dev@gmail.com","username":"nisha","social_logintype":"A"}
+     * user_data : {"id":48,"useremail":"nsharma19990@gmail.com","username":"nisha","social_logintype":"A","usertype":"Non Client"}
      */
 
     private String status;
@@ -59,16 +59,18 @@ public class LoginResponseFb {
 
     public static class UserDataBean {
         /**
-         * id : 31
-         * useremail : qa4dev@gmail.com
+         * id : 48
+         * useremail : nsharma19990@gmail.com
          * username : nisha
          * social_logintype : A
+         * usertype : Non Client
          */
 
         private int id;
         private String useremail;
         private String username;
         private String social_logintype;
+        private String usertype;
 
         public int getId() {
             return id;
@@ -100,6 +102,14 @@ public class LoginResponseFb {
 
         public void setSocial_logintype(String social_logintype) {
             this.social_logintype = social_logintype;
+        }
+
+        public String getUsertype() {
+            return usertype;
+        }
+
+        public void setUsertype(String usertype) {
+            this.usertype = usertype;
         }
     }
 }

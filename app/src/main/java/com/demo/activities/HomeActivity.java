@@ -56,9 +56,28 @@ public class HomeActivity extends AppCompatActivity {
         binding.practiceLnwithout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(ac,OurPracticeActivity.class));
             }
         });
+
+        binding.ourTeamLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ac,OurTeamActivity.class));
+            }
+        });
+
+        binding.ourTeamwithoutLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ac,OurTeamActivity.class));
+            }
+        });
+
+   }
+
+   public void caseUpdateClick(View view){
+        startActivity(new Intent(ac,CaseUpdatesActivity.class));
 
    }
 
@@ -73,8 +92,8 @@ public class HomeActivity extends AppCompatActivity {
         MainApplication.getApiService().recentActivityMethod("application/json").enqueue(new Callback<RecentResponse>() {
             @Override
             public void onResponse(Call<RecentResponse> call, Response<RecentResponse> response) {
-                if(response.isSuccessful()){
-                    if(response.body().getRespCode().equals("1003")){
+                if(response.isSuccessful() && response.body()!=null){
+                    if(  response.body().getRespCode().equals("1003")){
                         binding.recentActivityRecycler.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.HORIZONTAL, false));
                         recentActivityAdapter = new RecentActivityAdapter(ac, response.body().getPosts_data());
                         binding.recentActivityRecycler.setAdapter(recentActivityAdapter);

@@ -6,7 +6,7 @@ package com.demo.retroutility;
 
 public class URLForApplication
  {
-     //live
-     public static String URL="https://mark-lawchambers.com/api/";
+     //local
+     public static String URL=" http://182.74.186.138/marklaw/api/";
 
  }

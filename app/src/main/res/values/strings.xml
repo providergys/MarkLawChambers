@@ -3,7 +3,7 @@
     <string name="signin">Sign in</string>
     <string name="or">-OR-</string>
     <string name="fbLogin">Login with Facebook</string>
-    <string name="dont">Don\'t have an account? <font color='red'>Sign Up</font></string>
+    <string name="dont">Don\'t have account? <font color='red'>Sign Up</font></string>
 
 
     //
@@ -35,4 +35,11 @@
     <string name="reach">REACH US</string>
     <string name="setting">SETTING</string>
     <string name="practicearea">Our Practice Area</string>
+    <string name="casename">Case -1 PARK</string>
+    <string name="fileref">FILE REF: HHQ/18/2345/A-18-08/KL</string>
+    <string name="corance">Correncepondance</string>
+    <string name="docu">Documents</string>
+    <string name="back">Back</string>
+    <string name="pdf">Pdf</string>
+    <string name="advisor">OUR EXTERNAL ADVISOR</string>
 </resources>

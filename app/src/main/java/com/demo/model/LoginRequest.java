@@ -17,9 +17,18 @@ public class LoginRequest {
     private String mobile_number;
     private String socialid;
     private String logintype;
+    private String usertype;
 
     public String getUsername() {
         return username;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
     }
 
     public void setUsername(String username) {

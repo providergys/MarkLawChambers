@@ -3,6 +3,7 @@ import com.demo.model.ForgotPassResponse;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
 import com.demo.model.LoginResponseFb;
+import com.demo.model.MyCasesModel;
 import com.demo.model.RecentResponse;
 
 import retrofit2.Call;
@@ -36,4 +37,13 @@ public interface ApiCalls {
 
     @GET("recent_activities")
     Call<RecentResponse> recentActivityMethod(@Header("Content-Type") String contenttype);
+
+    @GET("case_studies")
+    Call<MyCasesModel> getCases(@Header("Content-Type") String contenttype);
+
+
+    @GET("practices")
+    Call<PracticeResponse> getPracticeLaw(@Header("Content-Type") String contenttype);
+
+
 }

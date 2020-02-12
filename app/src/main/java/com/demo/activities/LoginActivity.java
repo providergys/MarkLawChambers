@@ -7,7 +7,9 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.databinding.DataBindingUtil;
+
 import com.basgeekball.awesomevalidation.AwesomeValidation;
 import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.demo.marklaw.R;
@@ -32,6 +34,7 @@ import java.util.Arrays;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static com.basgeekball.awesomevalidation.ValidationStyle.BASIC;
 
 public class LoginActivity extends Activity {
@@ -43,7 +46,7 @@ public class LoginActivity extends Activity {
     ProgDialog prog = new ProgDialog();
     UserSharedPreferences mSharedPref;
 
-   @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
@@ -53,7 +56,7 @@ public class LoginActivity extends Activity {
     private void init() {
         ac = LoginActivity.this;
         mAwesomeValidation = new AwesomeValidation(BASIC);
-        mSharedPref=new UserSharedPreferences(ac);
+        mSharedPref = new UserSharedPreferences(ac);
         validations();
         fbData();
 
@@ -66,8 +69,6 @@ public class LoginActivity extends Activity {
         boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
         if (!loggedOut) {
             Log.e("hello", "login");
-
-
 
 
         } else {
@@ -88,29 +89,34 @@ public class LoginActivity extends Activity {
                                 Log.d("TAG", object.toString());
                                 try {
                                     String first_name = object.getString("first_name");
-                                    String last_name = object.getString("last_name");
+                                //    String last_name = object.getString("last_name");
                                     String email = object.getString("email");
                                     String id = object.getString("id");
-                                    String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
+                                 //   String image_url = "https://graph.facebook.com/" + id + "/picture?type=normal";
 
 
                                     LoginRequest loginRequest = new LoginRequest();
                                     prog.progDialog(ac);
 
-
                                     loginRequest.setSocialid(id);
                                     loginRequest.setEmail(email);
                                     loginRequest.setUsername(first_name);
                                     loginRequest.setLogintype("A");
+                                    loginRequest.setUsertype("Non Client");
 
                                     MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
                                         @Override
                                         public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
-                                            if (response.isSuccessful()) {
+                                            if (response.isSuccessful() && response.body() != null) {
                                                 prog.hideProg();
+                                                mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
+                                                mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
+                                                mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
+                                                mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                                Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
 
-                                                Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
                                             } else {
                                                 prog.hideProg();
                                             }
@@ -186,27 +192,25 @@ public class LoginActivity extends Activity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                if (response.isSuccessful()) {
+                if (response.body() !=null && response.isSuccessful()) {
                     prog.hideProg();
-                    if (response.body().getRespCode().matches("1010")) {
+                    if ( response.body().getRespCode().matches("1010")) {
                         Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
-                        mSharedPref.save(Constants.USER_NAME,response.body().getUser_data().getUsername());
-                        mSharedPref.save(Constants.USER_ID,String.valueOf(response.body().getUser_data().getId()));
-                        mSharedPref.save(Constants.USER_PHONE,response.body().getUser_data().getMobile_number());
-                        mSharedPref.save(Constants.USER_EMAIL,response.body().getUser_data().getUseremail());
-                        mSharedPref.save(Constants.USER_TYPE,response.body().getUser_data().getUsertype());
-                        startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+                        mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
+                        mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
+                        mSharedPref.save(Constants.USER_PHONE, response.body().getUser_data().getMobile_number());
+                        mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
+                        mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 
                     } else {
-
-
                         Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
                     }
 
                 } else {
                     prog.hideProg();
-                    Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
+
                 }
             }
 
@@ -214,10 +218,7 @@ public class LoginActivity extends Activity {
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 prog.hideProg();
                 Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
-
-
                 //   snakeBaar.showSnackBar(ac, "Something went wrong..", login_Layout);
-
             }
         });
     }
