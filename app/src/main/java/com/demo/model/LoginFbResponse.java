@@ -1,6 +1,6 @@
 package com.demo.model;
 
-public class LoginResponseFb {
+public class LoginFbResponse {
 
 
     /**

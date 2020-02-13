@@ -68,14 +68,14 @@ public class LoginResponse {
          * usertype : Non Client
          */
 
-        private Object id;
+        private int id;
         private String useremail;
         private String username;
         private String password;
         private String mobile_number;
         private String usertype;
 
-        public Object getId() {
+        public int getId() {
             return id;
         }
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+   >
+
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@drawable/whitebg"
+        android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:onClick="back"
+            android:src="@drawable/ic_arrow_back_black"
+            android:id="@+id/backTeam"/>
+        <ImageView
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_below="@+id/backTeam"
+            android:id="@+id/teamImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_200sdp"
+            android:src="@drawable/activity1"
+            android:scaleType="fitXY"
+            android:padding="@dimen/_10sdp"/>
+
+        <TextView
+            android:id="@+id/teamContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/teamImage"
+            android:padding="@dimen/_10sdp"/>
+    </RelativeLayout>
+    </ScrollView>
+</layout>

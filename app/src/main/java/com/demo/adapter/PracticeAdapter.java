@@ -2,6 +2,7 @@ package com.demo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.databinding.DataBindingUtil;
@@ -10,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.PracticeItemListBinding;
-import com.demo.marklaw.databinding.TeamItemListBinding;
-import com.demo.model.TeamModel;
 import com.demo.retroutility.PracticeResponse;
 
 import java.util.List;
@@ -40,8 +39,14 @@ public class PracticeAdapter extends RecyclerView.Adapter<PracticeAdapter.ViewHo
             Glide.with(context).load(myListData.isImage()).into(holder.binding.practiceImage);
 
         } else {
-            Glide.with(context).load(R.drawable.sniper).into(holder.binding.practiceImage);
+            Glide.with(context).load(R.drawable.placeholder).into(holder.binding.practiceImage);
         }
+        holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 

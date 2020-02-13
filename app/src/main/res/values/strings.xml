@@ -42,4 +42,10 @@
     <string name="back">Back</string>
     <string name="pdf">Pdf</string>
     <string name="advisor">OUR EXTERNAL ADVISOR</string>
+    <string name="suprtteam">SUPPORTING TEAM</string>
+    <string name="changePass">Change Password</string>
+    <string name="logout">Logout</string>
+    <string name="enterPass">Old Password</string>
+    <string name="newpass">New Password</string>
+    <string name="confirmPass">Confirm Password</string>
 </resources>

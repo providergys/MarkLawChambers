@@ -34,12 +34,16 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+
+
+
         init();
     }
 
     private void init() {
         ac = HomeActivity.this;
         mSharedPref = new UserSharedPreferences(ac);
+        Log.e("userIdHome",""+String.valueOf(mSharedPref.getString(Constants.USER_ID)));
         if (mSharedPref.getString(Constants.USER_TYPE).equals("Client")) {
             binding.withCaseRel.setVisibility(View.VISIBLE);
         } else {
@@ -109,5 +113,17 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(ac,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    public void settingLn(View view){
+        startActivity(new Intent(HomeActivity.this,SettingActivity.class));
+
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

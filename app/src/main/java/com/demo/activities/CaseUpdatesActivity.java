@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import com.demo.fragment.CaseUpdateFragment;
@@ -40,5 +41,12 @@ public class CaseUpdatesActivity extends AppCompatActivity {
         transaction.replace(R.id.caseFragment, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    public void settingLn(View view){
+        startActivity(new Intent(CaseUpdatesActivity.this,SettingActivity.class));
+    }
+    public void home(View view){
+        startActivity(new Intent(CaseUpdatesActivity.this,HomeActivity.class));
     }
 }

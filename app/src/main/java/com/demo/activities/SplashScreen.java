@@ -16,6 +16,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.demo.marklaw.databinding.SplashScreenBinding;
 import com.demo.marklaw.R;
+import com.demo.utility.Constants;
+import com.demo.utility.UserSharedPreferences;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -33,12 +35,14 @@ public class SplashScreen extends Activity {
     protected boolean _active = true;
     protected int _splashTime = 1;/*500*/
     SplashScreenBinding binding;
+    UserSharedPreferences mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.splash_screen);
         ac = SplashScreen.this;
+        mSharedPref = new UserSharedPreferences(ac);
         genereatekey();
 
         // animation of logo
@@ -119,25 +123,20 @@ public class SplashScreen extends Activity {
                 handler.post(new Runnable() {
 
                     public void run() {
-                       startActivity(new Intent(SplashScreen.this,LoginActivity.class));
 
+                    Log.e("userId",""+mSharedPref.getString(Constants.USER_ID));
 
-                   /*     if(tinyDB.getBoolean("rememberme_check")){
-                            tinyDB.putBoolean("loginCheck",false);
-                            Intent mainIntent = new Intent(SplashScreen.this, ProductActivity.class);
+                     if(mSharedPref.getString(Constants.USER_ID).equalsIgnoreCase("")){
+                         startActivity(new Intent(SplashScreen.this, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                         finish();
+                          finish();
+                        }else{
+                            Intent mainIntent = new Intent(SplashScreen.this, HomeActivity.class);
                             mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(mainIntent);
                             finish();
-                        }else{
-                            Intent mainIntent = new Intent(SplashScreen.this, LoginActivity.class);
-                            mainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            startActivity(mainIntent);
-                        }*/
-
-
-
-
-                        //  progressBar.setVisibility(View.VISIBLE);
+                        }
+           //  progressBar.setVisibility(View.VISIBLE);
                     }
 
                 });

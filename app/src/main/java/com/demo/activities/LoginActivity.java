@@ -16,7 +16,7 @@ import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityLoginBinding;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
-import com.demo.model.LoginResponseFb;
+import com.demo.model.LoginFbResponse;
 import com.demo.retroutility.MainApplication;
 import com.demo.utility.Constants;
 import com.demo.utility.ProgDialog;
@@ -69,9 +69,15 @@ public class LoginActivity extends Activity {
         boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
         if (!loggedOut) {
             Log.e("hello", "login");
+            binding.emailEdit.setFocusable(false);
+            binding.passEdit.setFocusable(false);
+            binding.signInBtn.setEnabled(false);
+
+
 
 
         } else {
+
             Log.e("hello", "logout");
 
         }
@@ -104,16 +110,17 @@ public class LoginActivity extends Activity {
                                     loginRequest.setLogintype("A");
                                     loginRequest.setUsertype("Non Client");
 
-                                    MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
+                                    MainApplication.getApiService().loginFbMethod("application/json", loginRequest).enqueue(new Callback<LoginFbResponse>() {
                                         @Override
-                                        public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
-                                            if (response.isSuccessful() && response.body() != null) {
+                                        public void onResponse(Call<LoginFbResponse> call, Response<LoginFbResponse> response) {
+                                            if (response.isSuccessful()) {
                                                 prog.hideProg();
                                                 mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
                                                 mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
                                                 mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
                                                 mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
-                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                                                startActivity(new Intent(LoginActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                                finish();
                                                 Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
 
 
@@ -123,7 +130,7 @@ public class LoginActivity extends Activity {
                                         }
 
                                         @Override
-                                        public void onFailure(Call<LoginResponseFb> call, Throwable t) {
+                                        public void onFailure(Call<LoginFbResponse> call, Throwable t) {
                                             prog.hideProg();
                                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                                         }
@@ -201,7 +208,8 @@ public class LoginActivity extends Activity {
                         mSharedPref.save(Constants.USER_PHONE, response.body().getUser_data().getMobile_number());
                         mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
                         mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
-                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        finish();
 
                     } else {
                         Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
@@ -221,5 +229,10 @@ public class LoginActivity extends Activity {
                 //   snakeBaar.showSnackBar(ac, "Something went wrong..", login_Layout);
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

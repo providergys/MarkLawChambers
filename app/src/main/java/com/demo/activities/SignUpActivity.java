@@ -17,7 +17,7 @@ import com.demo.marklaw.databinding.ActivitySignUpBinding;
 import com.demo.marklaw.R;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
-import com.demo.model.LoginResponseFb;
+import com.demo.model.LoginFbResponse;
 import com.demo.retroutility.MainApplication;
 import com.demo.utility.Constants;
 import com.demo.utility.ProgDialog;
@@ -72,6 +72,16 @@ public class SignUpActivity extends AppCompatActivity {
         boolean loggedOut = AccessToken.getCurrentAccessToken() == null;
         if (!loggedOut) {
             Log.e("hello", "login");
+
+
+            binding.userNameEdt.setFocusable(false);
+            binding.emailEdt.setFocusable(false);
+            binding.passEdt.setEnabled(false);
+            binding.numberEdt.setEnabled(false);
+            binding.signBtnNew.setEnabled(false);
+
+
+
         } else {
             Log.e("hello", "logout");
         }
@@ -100,23 +110,24 @@ public class SignUpActivity extends AppCompatActivity {
                                     loginRequest.setUsername(first_name);
                                     loginRequest.setLogintype("A");
                                     loginRequest.setUsertype("Non Client");
-                                    MainApplication.getApiService().loginMethodFb("application/json", loginRequest).enqueue(new Callback<LoginResponseFb>() {
+                                    MainApplication.getApiService().loginFbMethod("application/json", loginRequest).enqueue(new Callback<LoginFbResponse>() {
                                         @Override
-                                        public void onResponse(Call<LoginResponseFb> call, Response<LoginResponseFb> response) {
+                                        public void onResponse(Call<LoginFbResponse> call, Response<LoginFbResponse> response) {
                                             if (response.body()!=null && response.isSuccessful()) {
                                                 prog.hideProg();
                                                 mSharedPref.save(Constants.USER_NAME, response.body().getUser_data().getUsername());
                                                 mSharedPref.save(Constants.USER_ID, String.valueOf(response.body().getUser_data().getId()));
                                                 mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
                                                 mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
-                                                startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                                                startActivity(new Intent(SignUpActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                                finish();
                                             } else {
                                                 prog.hideProg();
                                             }
                                         }
 
                                         @Override
-                                        public void onFailure(Call<LoginResponseFb> call, Throwable t) {
+                                        public void onFailure(Call<LoginFbResponse> call, Throwable t) {
                                             prog.hideProg();
                                             Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                                         }
@@ -172,7 +183,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Show Your Progress Dialog
 
 
-        MainApplication.getApiService().signUpmethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
+        MainApplication.getApiService().signUpMethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
@@ -184,7 +195,8 @@ public class SignUpActivity extends AppCompatActivity {
                         mSharedPref.save(Constants.USER_PHONE, response.body().getUser_data().getMobile_number());
                         mSharedPref.save(Constants.USER_EMAIL, response.body().getUser_data().getUseremail());
                         mSharedPref.save(Constants.USER_TYPE, response.body().getUser_data().getUsertype());
-                        startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                        startActivity(new Intent(SignUpActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        finish();
 
                     } else if (response.body()!=null && response.body().getSuccess().equals("false")) {
                         Log.e("successfalse", "" + response.body().getSuccess());

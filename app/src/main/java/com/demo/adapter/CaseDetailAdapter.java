@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.demo.activities.PdfViewActivity;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.CaseDetailItemListBinding;
-import com.demo.model.MyCasesModel;
+import com.demo.model.CasesResponse;
 
 import java.util.ArrayList;
 
 public class CaseDetailAdapter extends RecyclerView.Adapter<CaseDetailAdapter.ViewHolder> {
     Context context;
-    ArrayList<? extends MyCasesModel.PostsDataBean.CasesBean> listdata;
+    ArrayList<? extends CasesResponse.PostsDataBean.CasesBean> listdata;
 
-    public CaseDetailAdapter(Context ac, ArrayList<? extends MyCasesModel.PostsDataBean.CasesBean> listdata) {
+    public CaseDetailAdapter(Context ac, ArrayList<? extends CasesResponse.PostsDataBean.CasesBean> listdata) {
         this.context = ac;
         this.listdata = listdata;
     }
@@ -34,7 +34,7 @@ public class CaseDetailAdapter extends RecyclerView.Adapter<CaseDetailAdapter.Vi
 
     @Override
     public void onBindViewHolder(CaseDetailAdapter.ViewHolder holder, int position) {
-        final MyCasesModel.PostsDataBean.CasesBean myListData = listdata.get(position);
+        final CasesResponse.PostsDataBean.CasesBean myListData = listdata.get(position);
         holder.binding.dateTextView.setText(myListData.getDate());
         holder.binding.contentTextView.setText(myListData.getCase_studies());
 

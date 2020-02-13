@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <ScrollView
-        android:id="@+id/ScrollView01"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        android:background="@drawable/whitebg"
-        android:scrollbars="none">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-      >
+        android:background="@drawable/whitebg">
 
         <LinearLayout
-            android:layout_above="@+id/bottom_ln"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_above="@+id/bottom_ln"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:background="@drawable/blur_team"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -42,103 +36,74 @@
             </LinearLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-               android:layout_marginLeft="@dimen/_10sdp"
-                android:id="@+id/team_recycler"
+            <ScrollView
+                android:id="@+id/ScrollView01"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp" />
-
-                <View android:layout_width="match_parent"
-                    android:layout_height="@dimen/_1sdp"
-                    android:background="@color/colorGrey"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_marginRight="@dimen/_20sdp"
-                    android:layout_marginTop="@dimen/_10sdp"/>
-
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/advisor"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/_15sdp"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/_10sdp"/>
-
-            <LinearLayout
-                android:padding="@dimen/_10sdp"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_100sdp"
-                        android:src="@drawable/ang"
-                        android:scaleType="fitXY"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/advisor"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Read More"
-                        android:textColor="#E91515"
-                        android:textSize="@dimen/_10sdp"
-                        android:gravity="center" />
-
-
-
-                </LinearLayout>
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:scrollbars="none">
 
 
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="@dimen/_10sdp">
+                    android:orientation="vertical">
 
 
-
-                    <ImageView
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/team_recycler"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/_100sdp"
-                        android:src="@drawable/pius"
-                        android:scaleType="fitXY"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_20sdp"
+                        android:background="@color/colorGrey" />
+
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
                         android:text="@string/advisor"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_10sdp"
-                        android:gravity="center"
-                        android:layout_marginTop="@dimen/_10sdp"/>
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/external_adv_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp" />
+
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Read More"
-                        android:textColor="#E91515"
-                        android:textSize="@dimen/_10sdp"
-                        android:gravity="center" />
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:gravity="center"
+                        android:text="@string/suprtteam"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="@dimen/_15sdp" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/support_team_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_10sdp" />
                 </LinearLayout>
-            </LinearLayout>
+            </ScrollView>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/bottom_ln"
             android:layout_width="match_parent"
@@ -149,6 +114,7 @@
             android:weightSum="4">
 
             <LinearLayout
+                android:onClick="home"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -217,6 +183,7 @@
 
 
             <LinearLayout
+                android:onClick="settingLn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -237,9 +204,6 @@
                     android:textSize="@dimen/_8sdp"
                     android:textStyle="bold" />
             </LinearLayout>
-
-
         </LinearLayout>
     </RelativeLayout>
-    </ScrollView>
 </layout>

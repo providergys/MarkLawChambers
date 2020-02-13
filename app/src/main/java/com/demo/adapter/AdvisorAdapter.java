@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.demo.activities.TeamDetail;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.TeamItemListBinding;
@@ -21,42 +20,42 @@ import java.util.List;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
-public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
+public class AdvisorAdapter extends RecyclerView.Adapter<AdvisorAdapter.ViewHolder> {
     Context context;
-    List<TeamResponse.TeampostsBean> listdata;
+    List<TeamResponse.AdvisorpostsBean> listdata;
 
-    public TeamAdapter(Context ac, List<TeamResponse.TeampostsBean> listdata) {
+    public AdvisorAdapter(Context ac, List<TeamResponse.AdvisorpostsBean> listdata) {
         this.context = ac;
         this.listdata = listdata;
     }
 
     @Override
-    public TeamAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public AdvisorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         TeamItemListBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.team_item_list, parent, false);
-        TeamAdapter.ViewHolder viewHolder = new TeamAdapter.ViewHolder(binding);
+        AdvisorAdapter.ViewHolder viewHolder = new AdvisorAdapter.ViewHolder(binding);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(TeamAdapter.ViewHolder holder, int position) {
-        final TeamResponse.TeampostsBean myListData = listdata.get(position);
+    public void onBindViewHolder(final AdvisorAdapter.ViewHolder holder, int position) {
+       final TeamResponse.AdvisorpostsBean myListData = listdata.get(position);
         holder.binding.teamTitleText.setText(myListData.getTitle());
         holder.binding.teamdescText.setText(myListData.getContent());
-      //  Glide.with(context).load(myListData.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.binding.teamProfileImage);
-
-
-        Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);
-        Glide.with(getApplicationContext()).load(myListData.getImage()).centerCrop()
-                .error(mDefaultBackground).into(holder.binding.teamProfileImage);
 
         holder.binding.teamreadText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, TeamDetail.class)
-                .putExtra("teamImage",myListData.getImage()).putExtra("Description",myListData.getContent()));
+                        .putExtra("teamImage",myListData.getImage()).putExtra("Description",myListData.getContent()));
+
+                Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);
+                Glide.with(getApplicationContext()).load(myListData.getImage()).centerCrop()
+                        .error(mDefaultBackground).into(holder.binding.teamProfileImage);
+
             }
         });
-  }
+
+    }
 
 
     @Override
@@ -73,4 +72,3 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         }
     }
 }
-

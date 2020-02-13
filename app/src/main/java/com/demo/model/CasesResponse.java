@@ -3,7 +3,7 @@ package com.demo.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class MyCasesModel {
+public class CasesResponse {
 
 
     /**

@@ -3,37 +3,84 @@ package com.demo.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.demo.adapter.RecentActivityAdapter;
+import com.demo.adapter.AdvisorAdapter;
+import com.demo.adapter.SupportAdapter;
 import com.demo.adapter.TeamAdapter;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityOurTeamBinding;
-import com.demo.model.TeamModel;
+import com.demo.model.TeamResponse;
+import com.demo.retroutility.MainApplication;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class OurTeamActivity extends AppCompatActivity {
     ActivityOurTeamBinding binding;
-    TeamAdapter teamAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_our_team);
-        TeamModel[] mList=new TeamModel[]{new TeamModel("Aaron Mark Pius","Aaron Mark is the managing partner and the diving force in the Mark Law Chambers",R.drawable.aaron),
-                new TeamModel("Sia Yi Ting","Sia Yi Ting is the managing partner and the diving force in the Mark Law Chambers ",R.drawable.sia),
-                new TeamModel("Ow Ji jim","Ow Ji jim is the managing partner and the diving force in the Mark Law Chambers ",R.drawable.ow),
-                new TeamModel("Elaine Tai Yee Lian","Elaine Tai Yee Lian is the managing partner and the diving force in the Mark Law Chambers ",R.drawable.elaine),
-                new TeamModel("Nai Mei kei","Nai Mei kei is the managing partner and the diving force in the Mark Law Chambers ",R.drawable.nai)
+        MainApplication.getApiService().getTeamMethod("application/json").enqueue(new Callback<TeamResponse>() {
+            @Override
+            public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
+                setTeamAdapter(response.body().getTeamposts());
+                setAdvisorAdapter(response.body().getAdvisorposts());
+                setSupportingAdapter(response.body().getSupportingposts());
 
-        };
-        GridLayoutManager manager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
-        teamAdapter = new TeamAdapter(getApplicationContext(), mList);
+
+            }
+
+            @Override
+            public void onFailure(Call<TeamResponse> call, Throwable t) {
+
+            }
+        });
+
+
+    }
+    private void setTeamAdapter(List<TeamResponse.TeampostsBean> teamposts) {
+        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
+        TeamAdapter teamAdapter = new TeamAdapter(getApplicationContext(), teamposts);
         binding.teamRecycler.setLayoutManager(manager);
         binding.teamRecycler.setAdapter(teamAdapter);
     }
-    public void back(View view){
+
+    private void setAdvisorAdapter(List<TeamResponse.AdvisorpostsBean> advisorposts) {
+        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
+        AdvisorAdapter teamAdapter = new AdvisorAdapter(getApplicationContext(), advisorposts);
+        binding.externalAdvRecycler.setLayoutManager(manager);
+        binding.externalAdvRecycler.setAdapter(teamAdapter);
+    }
+
+
+    private void setSupportingAdapter(List<TeamResponse.SupportingpostsBean> supportingposts) {
+        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
+        SupportAdapter teamAdapter = new SupportAdapter(getApplicationContext(), supportingposts);
+        binding.supportTeamRecycler.setLayoutManager(manager);
+        binding.supportTeamRecycler.setAdapter(teamAdapter);
+
+
+
+    }
+
+    public void back(View view) {
         finish();
     }
+
+    public void settingLn(View view){
+        startActivity(new Intent(OurTeamActivity.this,SettingActivity.class));
+    }
+    public void home(View view){
+        startActivity(new Intent(OurTeamActivity.this,HomeActivity.class));
+    }
+
 }

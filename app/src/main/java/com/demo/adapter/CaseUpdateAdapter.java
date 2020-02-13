@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,18 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.demo.activities.CaseDetailActivity;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.CaseItemListBinding;
-import com.demo.marklaw.databinding.RecentItemListBinding;
-import com.demo.model.MyCasesModel;
+import com.demo.model.CasesResponse;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class CaseUpdateAdapter extends RecyclerView.Adapter<CaseUpdateAdapter.ViewHolder> {
     Context context;
-    List<MyCasesModel.PostsDataBean> listdata;
-    public CaseUpdateAdapter(Activity ac, List<MyCasesModel.PostsDataBean> listdata) {
+    List<CasesResponse.PostsDataBean> listdata;
+    public CaseUpdateAdapter(Activity ac, List<CasesResponse.PostsDataBean> listdata) {
         this.context = ac;
         this.listdata = listdata;
     }
@@ -42,7 +38,7 @@ public class CaseUpdateAdapter extends RecyclerView.Adapter<CaseUpdateAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        final MyCasesModel.PostsDataBean myListData = listdata.get(position);
+        final CasesResponse.PostsDataBean myListData = listdata.get(position);
         String date = myListData.getDate();
         holder.binding.dateText.setText(date.substring(0, date.indexOf(' ')));
         holder.binding.statusText.setText(myListData.getProgress());

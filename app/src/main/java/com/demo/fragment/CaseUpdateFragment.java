@@ -2,12 +2,10 @@ package com.demo.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +15,8 @@ import android.widget.Toast;
 import com.demo.adapter.CaseUpdateAdapter;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityCaseUpdateFragmentBinding;
-import com.demo.model.MyCasesModel;
+import com.demo.model.CasesResponse;
 import com.demo.retroutility.MainApplication;
-
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,9 +32,9 @@ public class CaseUpdateFragment extends Fragment {
         return view;
     }
     private void getCasesByServer() {
-        MainApplication.getApiService().getCases("application/json").enqueue(new Callback<MyCasesModel>() {
+        MainApplication.getApiService().getCasesMethod("application/json").enqueue(new Callback<CasesResponse>() {
             @Override
-            public void onResponse(Call<MyCasesModel> call, Response<MyCasesModel> response) {
+            public void onResponse(Call<CasesResponse> call, Response<CasesResponse> response) {
                 if(response.isSuccessful()) {
 
                     if (response.body().getRespCode().equals("1003")) {
@@ -54,7 +50,7 @@ public class CaseUpdateFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<MyCasesModel> call, Throwable t) {
+            public void onFailure(Call<CasesResponse> call, Throwable t) {
                 Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });

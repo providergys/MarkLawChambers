@@ -55,6 +55,7 @@
             android:weightSum="4">
 
             <LinearLayout
+                android:onClick="home"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -123,6 +124,7 @@
 
 
             <LinearLayout
+                android:onClick="settingLn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

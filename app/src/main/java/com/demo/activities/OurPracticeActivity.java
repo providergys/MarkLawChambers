@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.demo.adapter.PracticeAdapter;
-import com.demo.adapter.TeamAdapter;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityOurPracticeBinding;
 import com.demo.retroutility.MainApplication;
@@ -25,8 +25,7 @@ public class OurPracticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_our_practice);
-
-        MainApplication.getApiService().getPracticeLaw("application/json").enqueue(new Callback<PracticeResponse>() {
+        MainApplication.getApiService().getPracticeLawMethod("application/json").enqueue(new Callback<PracticeResponse>() {
             @Override
             public void onResponse(Call<PracticeResponse> call, Response<PracticeResponse> response) {
                 if(response.isSuccessful()) {
@@ -49,5 +48,12 @@ public class OurPracticeActivity extends AppCompatActivity {
 
     public void back(View view) {
         finish();
+    }
+
+    public void settingLn(View view){
+        startActivity(new Intent(OurPracticeActivity.this,SettingActivity.class));
+    }
+    public void home(View view){
+        startActivity(new Intent(OurPracticeActivity.this,HomeActivity.class));
     }
 }

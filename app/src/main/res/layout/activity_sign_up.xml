@@ -183,6 +183,7 @@
                 </RelativeLayout>
 
                 <Button
+                    android:id="@+id/signBtnNew"
                     android:layout_width="@dimen/_120sdp"
                     android:layout_height="@dimen/_35sdp"
                     android:layout_gravity="center"
