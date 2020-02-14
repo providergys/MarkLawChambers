@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import com.demo.fragment.CaseUpdateFragment;
@@ -20,6 +21,12 @@ public class CaseUpdatesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_case_updates);
+        binding.messageLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(CaseUpdatesActivity.this,MessageActivity.class));
+            }
+        });
         init(); }
 
     private void init() {
@@ -48,5 +55,11 @@ public class CaseUpdatesActivity extends AppCompatActivity {
     }
     public void home(View view){
         startActivity(new Intent(CaseUpdatesActivity.this,HomeActivity.class));
+    }
+
+    public void reachUs(View view){
+        Uri uri = Uri.parse("http://182.74.186.138/marklaw/contact-us/"); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }

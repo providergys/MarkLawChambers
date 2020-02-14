@@ -4,12 +4,13 @@ import java.util.List;
 
 public class PracticeResponse {
 
+
     /**
      * status : ok
      * RespCode : 1003
      * success : true
      * Message : Data Fetched Successfully
-     * posts_data : [{"id":1457,"date":"2020-02-12 04:36:12","title":"Media & Entertainment","content":"","image":false},{"id":1454,"date":"2020-02-12 04:36:02","title":"Conveyancing & Corporate","content":"","image":false},{"id":1451,"date":"2020-02-12 04:35:52","title":"Trademark Agent","content":"","image":false},{"id":1448,"date":"2020-02-12 04:35:42","title":"Civil Litigation","content":"","image":false},{"id":1445,"date":"2020-02-12 04:35:33","title":"Criminal Litigation","content":"","image":false}]
+     * posts_data : [{"id":1457,"date":"2020-02-12 04:36:12","title":"Media & Entertainment","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ","image":"http://182.74.186.138/marklaw/wp-content/uploads/2020/02/1.jpg"},{"id":1454,"date":"2020-02-12 04:36:02","title":"Conveyancing & Corporate","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ","image":"http://182.74.186.138/marklaw/wp-content/uploads/2019/08/2.jpg"},{"id":1451,"date":"2020-02-12 04:35:52","title":"Trademark Agent","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ","image":"http://182.74.186.138/marklaw/wp-content/uploads/2019/08/1.jpg"},{"id":1448,"date":"2020-02-12 04:35:42","title":"Civil Litigation","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ","image":"http://182.74.186.138/marklaw/wp-content/uploads/2020/02/2.jpg"},{"id":1445,"date":"2020-02-12 04:35:33","title":"Criminal Litigation","content":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ","image":"http://182.74.186.138/marklaw/wp-content/uploads/2019/08/5.jpg"}]
      */
 
     private String status;
@@ -63,15 +64,15 @@ public class PracticeResponse {
          * id : 1457
          * date : 2020-02-12 04:36:12
          * title : Media & Entertainment
-         * content :
-         * image : false
+         * content : Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+         * image : http://182.74.186.138/marklaw/wp-content/uploads/2020/02/1.jpg
          */
 
         private int id;
         private String date;
         private String title;
         private String content;
-        private boolean image;
+        private String image;
 
         public int getId() {
             return id;
@@ -105,11 +106,11 @@ public class PracticeResponse {
             this.content = content;
         }
 
-        public boolean isImage() {
+        public String getImage() {
             return image;
         }
 
-        public void setImage(boolean image) {
+        public void setImage(String image) {
             this.image = image;
         }
     }

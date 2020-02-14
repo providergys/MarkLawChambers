@@ -72,11 +72,7 @@ public class LoginActivity extends Activity {
             binding.emailEdit.setFocusable(false);
             binding.passEdit.setFocusable(false);
             binding.signInBtn.setEnabled(false);
-
-
-
-
-        } else {
+            } else {
 
             Log.e("hello", "logout");
 

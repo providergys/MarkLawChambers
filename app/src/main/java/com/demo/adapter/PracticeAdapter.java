@@ -35,12 +35,7 @@ public class PracticeAdapter extends RecyclerView.Adapter<PracticeAdapter.ViewHo
     public void onBindViewHolder(PracticeAdapter.ViewHolder holder, int position) {
         PracticeResponse.PostsDataBean myListData = listdata.get(position);
         holder.binding.practiceTitleText.setText(myListData.getTitle());
-        if (myListData.isImage()) {
-            Glide.with(context).load(myListData.isImage()).into(holder.binding.practiceImage);
-
-        } else {
-            Glide.with(context).load(R.drawable.placeholder).into(holder.binding.practiceImage);
-        }
+        Glide.with(context).load(myListData.getImage()).into(holder.binding.practiceImage);
         holder.binding.practiceMainLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

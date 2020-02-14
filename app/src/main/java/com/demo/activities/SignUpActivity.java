@@ -18,6 +18,7 @@ import com.demo.marklaw.R;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
 import com.demo.model.LoginFbResponse;
+import com.demo.model.SignUpResponse;
 import com.demo.retroutility.MainApplication;
 import com.demo.utility.Constants;
 import com.demo.utility.ProgDialog;
@@ -183,9 +184,9 @@ public class SignUpActivity extends AppCompatActivity {
         //Show Your Progress Dialog
 
 
-        MainApplication.getApiService().signUpMethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
+        MainApplication.getApiService().signUpMethod("application/json", loginRequest).enqueue(new Callback<SignUpResponse>() {
             @Override
-            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 if (response.isSuccessful()) {
                     prog.hideProg();
                     if (response.body()!=null && response.body().getSuccess().equals("true")) {
@@ -214,7 +215,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<LoginResponse> call, Throwable t) {
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 prog.hideProg();
                 Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
 

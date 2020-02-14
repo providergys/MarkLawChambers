@@ -2,9 +2,10 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <RelativeLayout
+        android:background="@drawable/imgpsh_fullsize_anim"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/whitebg">
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_80sdp"
-                android:background="@drawable/whiteup"
+               android:background="@drawable/whiteup"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -78,6 +79,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/messageLn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -108,6 +110,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:onClick="reachUs"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/reach" />

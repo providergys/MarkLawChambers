@@ -41,7 +41,6 @@
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/whitebg"
         android:text="Inspection Report"
         android:textAllCaps="true"
         android:gravity="center"

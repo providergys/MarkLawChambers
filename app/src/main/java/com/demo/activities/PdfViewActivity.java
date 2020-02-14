@@ -23,7 +23,7 @@ public class PdfViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pdf_view);
 
         //find id of progress bar
-        porgress_bar =(ProgressBar) findViewById(R.id.porgress_bar);
+        porgress_bar =findViewById(R.id.porgress_bar);
 
         //show progress bar
         porgress_bar.setVisibility(View.VISIBLE);

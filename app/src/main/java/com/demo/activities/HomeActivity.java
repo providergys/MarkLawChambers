@@ -84,15 +84,15 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(ac);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(view);
-                dialog.setCancelable(true);
+                dialog.setContentView(R.layout.comingsoondialog);
+                dialog.setCanceledOnTouchOutside(true);
                 Button btnOk = dialog.findViewById(R.id.btnCancel);
                 dialog.show();
                 btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
-                        finish();
+
                     }
                 });
             }
@@ -114,6 +114,14 @@ public class HomeActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+
+
+        binding.messageLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this,MessageActivity.class));
             }
         });
 
@@ -156,6 +164,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void settingLn(View view) {
         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
+        finish();
 
     }
 
@@ -167,6 +176,8 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void reachUs(View view){
-        startActivity(new Intent(HomeActivity.this,ReachUsActivity.class));
+        Uri uri = Uri.parse("http://182.74.186.138/marklaw/contact-us/"); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+         startActivity(intent);
     }
 }

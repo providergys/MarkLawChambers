@@ -1,11 +1,15 @@
 package com.demo.retroutility;
 import com.demo.model.ChangePassResponse;
 import com.demo.model.ForgotPassResponse;
+import com.demo.model.GetchatResponse;
 import com.demo.model.LoginRequest;
 import com.demo.model.LoginResponse;
 import com.demo.model.LoginFbResponse;
 import com.demo.model.CasesResponse;
 import com.demo.model.RecentResponse;
+import com.demo.model.SendMessageRequest;
+import com.demo.model.SendMessageResponse;
+import com.demo.model.SignUpResponse;
 import com.demo.model.TeamResponse;
 
 import retrofit2.Call;
@@ -17,7 +21,7 @@ import retrofit2.http.POST;
 
 public interface ApiCalls {
     @POST("signup")
-    Call<LoginResponse> signUpMethod(@Header("Content-Type") String contentType, @Body LoginRequest loginRequest);
+    Call<SignUpResponse> signUpMethod(@Header("Content-Type") String contentType, @Body LoginRequest loginRequest);
 
 
     @POST("login")
@@ -49,4 +53,12 @@ public interface ApiCalls {
     @POST("change_password")
     Call<ChangePassResponse> changePassMethod(@Header("Content-Type") String contentType, @Body LoginRequest loginRequest);
 
+
+
+    @POST("send_message")
+    Call<SendMessageResponse> sendMessagemethod(@Header("Content-Type") String contenttype, @Body SendMessageRequest sendMessageRequest);
+
+
+    @POST("get_chat_messages")
+    Call<GetchatResponse> getChatmethod(@Header("Content-Type") String contenttype, @Body SendMessageRequest sendMessageRequest);
 }

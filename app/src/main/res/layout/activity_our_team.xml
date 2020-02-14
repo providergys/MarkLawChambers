@@ -5,7 +5,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/whitebg">
+        android:background="@drawable/imgpsh_fullsize_anim"
+       >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -147,6 +148,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/messageLn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -177,6 +179,7 @@
                 android:orientation="vertical">
 
                 <ImageView
+                    android:onClick="reachUs"
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:src="@drawable/reach" />

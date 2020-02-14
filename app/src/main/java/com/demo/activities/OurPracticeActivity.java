@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -44,6 +45,13 @@ public class OurPracticeActivity extends AppCompatActivity {
             }
         });
 
+        binding.messageLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OurPracticeActivity.this,MessageActivity.class));
+            }
+        });
+
     }
 
     public void back(View view) {
@@ -55,5 +63,11 @@ public class OurPracticeActivity extends AppCompatActivity {
     }
     public void home(View view){
         startActivity(new Intent(OurPracticeActivity.this,HomeActivity.class));
+    }
+
+    public void reachUs(View view){
+        Uri uri = Uri.parse("http://182.74.186.138/marklaw/contact-us/"); // missing 'http://' will cause crashed
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 }
