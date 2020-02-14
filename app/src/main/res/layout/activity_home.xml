@@ -114,6 +114,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/sharingLn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_5sdp"
@@ -239,6 +240,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/sharingwithoutLn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="@dimen/_5sdp"
@@ -416,6 +418,7 @@
 
 
                 <LinearLayout
+                    android:onClick="reachUs"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

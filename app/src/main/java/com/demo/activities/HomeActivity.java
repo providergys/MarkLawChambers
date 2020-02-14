@@ -5,11 +5,15 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.demo.adapter.RecentActivityAdapter;
@@ -34,89 +38,124 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
-
-
-
         init();
     }
 
     private void init() {
         ac = HomeActivity.this;
         mSharedPref = new UserSharedPreferences(ac);
-        Log.e("userIdHome",""+String.valueOf(mSharedPref.getString(Constants.USER_ID)));
+        Log.e("userIdHome", "" + String.valueOf(mSharedPref.getString(Constants.USER_ID)));
         if (mSharedPref.getString(Constants.USER_TYPE).equals("Client")) {
             binding.withCaseRel.setVisibility(View.VISIBLE);
         } else {
             binding.withoutCaseRel.setVisibility(View.VISIBLE);
         }
-          getActivities();
+        getActivities();
         binding.practiceLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ac,OurPracticeActivity.class));
+                startActivity(new Intent(ac, OurPracticeActivity.class));
             }
         });
 
         binding.practiceLnwithout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ac,OurPracticeActivity.class));
+                startActivity(new Intent(ac, OurPracticeActivity.class));
             }
         });
 
         binding.ourTeamLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ac,OurTeamActivity.class));
+                startActivity(new Intent(ac, OurTeamActivity.class));
             }
         });
 
         binding.ourTeamwithoutLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ac,OurTeamActivity.class));
+                startActivity(new Intent(ac, OurTeamActivity.class));
             }
         });
 
-   }
+        binding.sharingLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ac);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(view);
+                dialog.setCancelable(true);
+                Button btnOk = dialog.findViewById(R.id.btnCancel);
+                dialog.show();
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+            }
+        });
 
-   public void caseUpdateClick(View view){
-        startActivity(new Intent(ac,CaseUpdatesActivity.class));
+        binding.sharingwithoutLn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(ac);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.comingsoondialog);
+                dialog.setCanceledOnTouchOutside(true);
+                Button btnOk = dialog.findViewById(R.id.btnCancel);
+                dialog.show();
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
 
-   }
+                    }
+                });
+            }
+        });
 
-   public void visitWebsiteText(View view){
-       Intent intent = new Intent();
-       intent.setAction(Intent.ACTION_VIEW);
-       intent.addCategory(Intent.CATEGORY_BROWSABLE);
-       intent.setData(Uri.parse("https://mark-lawchambers.com"));
-       startActivity(intent);
-   }
+    }
+
+    public void caseUpdateClick(View view) {
+        startActivity(new Intent(ac, CaseUpdatesActivity.class));
+
+    }
+
+    public void visitWebsiteText(View view) {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.addCategory(Intent.CATEGORY_BROWSABLE);
+        intent.setData(Uri.parse("https://mark-lawchambers.com"));
+        startActivity(intent);
+    }
+
     private void getActivities() {
         MainApplication.getApiService().recentActivityMethod("application/json").enqueue(new Callback<RecentResponse>() {
             @Override
             public void onResponse(Call<RecentResponse> call, Response<RecentResponse> response) {
-                if(response.isSuccessful() && response.body()!=null){
-                    if(  response.body().getRespCode().equals("1003")){
+                if (response.isSuccessful() && response.body() != null) {
+                    if (response.body().getRespCode().equals("1003")) {
                         binding.recentActivityRecycler.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.HORIZONTAL, false));
                         recentActivityAdapter = new RecentActivityAdapter(ac, response.body().getPosts_data());
                         binding.recentActivityRecycler.setAdapter(recentActivityAdapter);
-                    }
-                    else{
-                        Toast.makeText(ac,response.body().getMessage(),Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<RecentResponse> call, Throwable t) {
-                Toast.makeText(ac,t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ac, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public void settingLn(View view){
-        startActivity(new Intent(HomeActivity.this,SettingActivity.class));
+    public void settingLn(View view) {
+        startActivity(new Intent(HomeActivity.this, SettingActivity.class));
 
     }
 
@@ -125,5 +164,9 @@ public class HomeActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
+    }
+
+    public void reachUs(View view){
+        startActivity(new Intent(HomeActivity.this,ReachUsActivity.class));
     }
 }
