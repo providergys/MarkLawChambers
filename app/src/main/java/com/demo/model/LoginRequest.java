@@ -18,6 +18,7 @@ public class LoginRequest {
     private String socialid;
     private String logintype;
     private String usertype;
+    private String oldpassword;
 
     public String getUsername() {
         return username;

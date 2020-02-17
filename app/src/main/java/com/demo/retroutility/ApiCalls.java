@@ -56,9 +56,9 @@ public interface ApiCalls {
 
 
     @POST("send_message")
-    Call<SendMessageResponse> sendMessagemethod(@Header("Content-Type") String contenttype, @Body SendMessageRequest sendMessageRequest);
+    Call<SendMessageResponse> sendMessageMethod(@Header("Content-Type") String contentType, @Body SendMessageRequest sendMessageRequest);
 
 
     @POST("get_chat_messages")
-    Call<GetchatResponse> getChatmethod(@Header("Content-Type") String contenttype, @Body SendMessageRequest sendMessageRequest);
+    Call<GetchatResponse> getChatMethod(@Header("Content-Type") String contentType, @Body SendMessageRequest sendMessageRequest);
 }

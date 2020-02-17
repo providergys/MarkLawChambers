@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.demo.adapter.ChatwindowAdapter;
 import com.demo.marklaw.R;
-import com.demo.model.GetchatRequest;
 import com.demo.model.GetchatResponse;
 import com.demo.model.SendMessageRequest;
 import com.demo.model.SendMessageResponse;
@@ -110,18 +109,16 @@ public class MessageActivity extends AppCompatActivity {
         });
 
        retrofitChatMessages();
-
         mHandler = new Handler();
         startRepeatingTask();
 
     }
 
     public void retrofitChatMessages() {
-
         SendMessageRequest sendMessageRequest= new SendMessageRequest();
         sendMessageRequest.setReceiverId("1");
         sendMessageRequest.setSenderId(mSharedPref.getString(Constants.USER_ID));
-        MainApplication.getApiService().getChatmethod("application/json", sendMessageRequest).enqueue(new Callback<GetchatResponse>() {
+        MainApplication.getApiService().getChatMethod("application/json", sendMessageRequest).enqueue(new Callback<GetchatResponse>() {
             @Override
             public void onResponse(Call<GetchatResponse> call, Response<GetchatResponse> response) {
 
@@ -158,7 +155,7 @@ public class MessageActivity extends AppCompatActivity {
         sendmessagesRequest.setSenderId(mSharedPref.getString(Constants.USER_ID));
         sendmessagesRequest.setReceiverId("1");
 
-        MainApplication.getApiService().sendMessagemethod("application/json", sendmessagesRequest).enqueue(new Callback<SendMessageResponse>() {
+        MainApplication.getApiService().sendMessageMethod("application/json", sendmessagesRequest).enqueue(new Callback<SendMessageResponse>() {
             @Override
             public void onResponse(Call<SendMessageResponse> call, Response<SendMessageResponse> response) {
 
@@ -238,7 +235,4 @@ public class MessageActivity extends AppCompatActivity {
         stopRepeatingTask();
         super.onStop();
     }
-
-
-
 }
