@@ -48,4 +48,6 @@
     <string name="enterPass">Old Password</string>
     <string name="newpass">New Password</string>
     <string name="confirmPass">Confirm Password</string>
+    <string name="current">Current Password</string>
+    <string name="invalid_message">Please Type Message</string>
 </resources>

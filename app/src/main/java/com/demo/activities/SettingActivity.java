@@ -86,6 +86,7 @@ public class SettingActivity extends AppCompatActivity {
 
     private void validations() {
         mAwesomeValidation.addValidation(ac, R.id.emailPassEdt, Patterns.EMAIL_ADDRESS, R.string.invalid_email);
+        mAwesomeValidation.addValidation(ac, R.id.currentPassEdt, RegexTemplate.NOT_EMPTY, R.string.invalid_email);
         mAwesomeValidation.addValidation(ac, R.id.newPassEdt, RegexTemplate.NOT_EMPTY, R.string.invalid_password);
         mAwesomeValidation.addValidation(ac, R.id.renewPassEdt, RegexTemplate.NOT_EMPTY, R.string.invalid_password);
     }
@@ -104,8 +105,9 @@ public class SettingActivity extends AppCompatActivity {
         } else {
             LoginRequest loginRequest = new LoginRequest();
             prog.progDialog(ac);
+            loginRequest.setCurrentpassword(binding.currentPassEdt.getText().toString());
+            loginRequest.setNewpassword(binding.newPassEdt.getText().toString());
             loginRequest.setEmail(binding.emailPassEdt.getText().toString());
-            loginRequest.setPassword(binding.newPassEdt.getText().toString());
 
             MainApplication.getApiService().changePassMethod("application/json", loginRequest).enqueue(new Callback<ChangePassResponse>() {
                 @Override

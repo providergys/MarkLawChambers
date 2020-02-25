@@ -12,9 +12,18 @@ public class SendMessageRequest {
     @SerializedName("receiver_id")
     @Expose
     private String receiverId;
+
+
+
     @SerializedName("chatmessage")
     @Expose
     private String chatmessage;
+
+
+
+    @SerializedName("audio_file")
+    @Expose
+    private String audio;
 
     public String getSenderId() {
         return senderId;
@@ -22,6 +31,14 @@ public class SendMessageRequest {
 
     public void setSenderId(String senderId) {
         this.senderId = senderId;
+    }
+
+    public String getAudio() {
+        return audio;
+    }
+
+    public void setAudio(String audio) {
+        this.audio = audio;
     }
 
     public String getReceiverId() {

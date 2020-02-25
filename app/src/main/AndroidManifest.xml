@@ -5,6 +5,11 @@
     tools:ignore="GoogleAppIndexingWarning">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +19,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.demo.activities.ReachUsActivity"></activity>
-        <activity android:name="com.demo.activities.InVoiceActivity"></activity>
+        <activity android:name="com.demo.activities.RecLastDemo">
+
+
+
+        </activity>
+        <activity android:name="com.demo.fragment.FragmentVideo" />
+        <activity android:name="com.demo.activities.ShareNewActivity" />
+        <activity android:name="com.demo.activities.SharingActivity" />
+        <activity android:name="com.demo.activities.AudioDemo">
+
+        </activity>
+        <activity android:name="com.demo.activities.ReachUsActivity" />
+        <activity android:name="com.demo.activities.InVoiceActivity" />
         <activity android:name="com.demo.activities.TeamDetail" />
         <activity android:name="com.demo.activities.SettingActivity" />
         <activity android:name="com.demo.activities.OurTeamActivity" />
@@ -36,6 +52,7 @@
         <activity
             android:name="com.demo.activities.SplashScreen"
             android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

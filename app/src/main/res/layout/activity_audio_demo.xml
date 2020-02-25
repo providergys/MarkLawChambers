@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.demo.activities.AudioDemo">
+
+
+
+
+   <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pause"
+        android:id="@+id/butto2"
+      />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Play"
+        android:id="@+id/butto3"
+        />
+
+
+
+    <SeekBar
+        android:background="@color/colorRed"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="wrap_content"
+        android:id="@+id/seek"
+        />
+
+
+
+
+
+
+
+</LinearLayout>

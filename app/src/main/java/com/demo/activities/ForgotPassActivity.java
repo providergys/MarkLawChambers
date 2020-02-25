@@ -47,7 +47,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
     public void next(View view) {
         if (mAwesomeValidation.validate()) {
-            Toast.makeText(ac, "Success", Toast.LENGTH_LONG).show();
+
             forgotPass();
         }
     }

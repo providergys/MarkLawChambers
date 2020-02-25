@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -44,16 +43,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="20dp">
 
-        <ImageView
-            android:id="@+id/send_btn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/send"
-            android:tint="@color/colorPrimary" />
+
 
         <EditText
             android:id="@+id/message_edt"
@@ -61,10 +51,48 @@
             android:layout_height="40dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@+id/send_btn"
+            android:layout_toLeftOf="@+id/sendLa"
             android:background="@drawable/chat_button"
             android:hint="Type your text here"
             android:paddingLeft="10dp" />
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/sendLa"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:id="@+id/send_btn"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="30dp"
+                android:src="@drawable/send"
+                android:tint="@color/colorPrimary" />
+
+            <Button
+                android:id="@+id/audio_btn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="@color/colorPrimary"
+                android:background="@drawable/ic_mic_black_24dp"/>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
+
+
+
+
 
 </RelativeLayout>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:id="@+id/ScrollView01"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/imgpsh_fullsize_anim"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+
+        <RelativeLayout
+            android:id="@+id/login_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp">
+
+            <ImageView
+                android:id="@+id/shareImage"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_alignParentTop="true"
+                android:onClick="back"
+                android:src="@drawable/ic_arrow_back_black" />
+            <com.google.android.material.tabs.TabLayout
+                android:layout_below="@+id/shareImage"
+                android:id="@+id/tabs"
+                style="@style/MyStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabGravity="fill"
+                app:tabMode="fixed" />
+
+
+
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_below="@+id/tabs"
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </RelativeLayout>
+    </ScrollView>
+</layout>

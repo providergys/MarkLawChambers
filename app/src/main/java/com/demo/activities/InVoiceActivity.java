@@ -73,8 +73,8 @@ public class InVoiceActivity extends Activity implements PaymentResultListener {
             options.put("amount", "100");
 
             JSONObject preFill = new JSONObject();
-            preFill.put("email", "test@razorpay.com");
-            preFill.put("contact", "9876543210");
+            preFill.put("email", "sverma@getyoursolutions.com");
+            preFill.put("contact", "7707448378");
 
             options.put("prefill", preFill);
 

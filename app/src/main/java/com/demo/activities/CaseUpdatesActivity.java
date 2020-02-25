@@ -58,8 +58,6 @@ public class CaseUpdatesActivity extends AppCompatActivity {
     }
 
     public void reachUs(View view){
-        Uri uri = Uri.parse("http://182.74.186.138/marklaw/contact-us/"); // missing 'http://' will cause crashed
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-        startActivity(intent);
+        startActivity(new Intent(CaseUpdatesActivity.this,ReachUsActivity.class));
     }
 }

@@ -82,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.sharingLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ac);
+                /*final Dialog dialog = new Dialog(ac);
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                 dialog.setContentView(R.layout.comingsoondialog);
                 dialog.setCanceledOnTouchOutside(true);
@@ -94,26 +94,17 @@ public class HomeActivity extends AppCompatActivity {
                         dialog.dismiss();
 
                     }
-                });
+                });*/
+
+
+                startActivity(new Intent(HomeActivity.this,SharingActivity.class));
             }
         });
 
         binding.sharingwithoutLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog dialog = new Dialog(ac);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.comingsoondialog);
-                dialog.setCanceledOnTouchOutside(true);
-                Button btnOk = dialog.findViewById(R.id.btnCancel);
-                dialog.show();
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-
-                    }
-                });
+                startActivity(new Intent(HomeActivity.this,SharingActivity.class));
             }
         });
 
@@ -176,8 +167,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     public void reachUs(View view){
-        Uri uri = Uri.parse("http://182.74.186.138/marklaw/contact-us/"); // missing 'http://' will cause crashed
-        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-         startActivity(intent);
+      startActivity(new Intent(HomeActivity.this,ReachUsActivity.class));
     }
 }
