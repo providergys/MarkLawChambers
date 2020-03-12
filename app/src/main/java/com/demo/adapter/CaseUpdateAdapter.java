@@ -42,7 +42,11 @@ public class CaseUpdateAdapter extends RecyclerView.Adapter<CaseUpdateAdapter.Vi
         String date = myListData.getDate();
         holder.binding.dateText.setText(date.substring(0, date.indexOf(' ')));
         holder.binding.statusText.setText(myListData.getProgress());
+
+         Log.e("content",""+myListData.getContent());
         holder.binding.contentText.setText(myListData.getContent());
+
+
         holder.binding.caseTitle.setText(myListData.getTitle());
         if (myListData.getProgress().equals("In progress")) {
             holder.binding.statusText.setTextColor(Color.parseColor("#F44336"));

@@ -17,6 +17,7 @@ import com.demo.model.ForgotPassResponse;
 import com.demo.model.LoginRequest;
 import com.demo.retroutility.MainApplication;
 import com.demo.utility.ProgDialog;
+import com.demo.utility.UserSharedPreferences;
 import com.facebook.login.Login;
 
 import retrofit2.Call;
@@ -30,6 +31,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     Activity ac;
     AwesomeValidation mAwesomeValidation;
     ProgDialog prog = new ProgDialog();
+    UserSharedPreferences mSharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_forgot_pass);
         ac = ForgotPassActivity.this;
         mAwesomeValidation = new AwesomeValidation(BASIC);
+        mSharedPref=new UserSharedPreferences(this);
         validations();
 
     }
@@ -66,6 +69,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                     }
 
                   else if(response.body().getRespCode().equals("7013")){
+                       mSharedPref.clear();
                         Toast.makeText(getApplicationContext(),response.body().getMessage(),Toast.LENGTH_LONG).show();
                         startActivity(new Intent(ac, LoginActivity.class));
                     }

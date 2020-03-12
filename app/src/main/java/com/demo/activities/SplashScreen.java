@@ -18,6 +18,9 @@ import com.demo.marklaw.databinding.SplashScreenBinding;
 import com.demo.marklaw.R;
 import com.demo.utility.Constants;
 import com.demo.utility.UserSharedPreferences;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -42,6 +45,15 @@ public class SplashScreen extends Activity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.splash_screen);
         ac = SplashScreen.this;
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( SplashScreen.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                String newToken = instanceIdResult.getToken();
+                Log.e("newToken",newToken);
+
+            }
+        });
         mSharedPref = new UserSharedPreferences(ac);
         genereatekey();
 

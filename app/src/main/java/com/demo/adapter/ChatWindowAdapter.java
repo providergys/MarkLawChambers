@@ -29,7 +29,6 @@ import com.demo.model.GetchatResponse;
 import java.io.IOException;
 import java.util.List;
 
-import static com.demo.activities.AudioDemo.oneTimeOnly;
 
 
 /**
@@ -75,6 +74,8 @@ public class ChatWindowAdapter extends RecyclerView.Adapter<ChatWindowAdapter.My
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         Log.e("sender", "" + chats.get(position).isIsSender());
+
+
         if (chats.get(position).isIsSender()) {
 
 
@@ -251,7 +252,12 @@ public class ChatWindowAdapter extends RecyclerView.Adapter<ChatWindowAdapter.My
             params2.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
 
 
-        } else {
+        }
+
+
+        else {
+
+
             holder.messageDate.setVisibility(View.VISIBLE);
             holder.message_body.setText(chats.get(position).getMessages().trim());
             holder.message_body.setTextColor(Color.parseColor("#000000"));

@@ -11,9 +11,9 @@
         android:scrollbars="none">
 
         <RelativeLayout
-            android:background="@drawable/imgpsh_fullsize_anim"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/imgpsh_fullsize_anim">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -23,6 +23,28 @@
 
 
                 <LinearLayout
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Amount To be Pay" />
+
+                    <TextView
+                        android:id="@+id/payAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_20sdp"
+                        android:text="23" />
+
+
+                </LinearLayout>
+
+              <!--  <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical"
@@ -35,7 +57,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_10sdp" />
 
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
 
 

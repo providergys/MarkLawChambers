@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+
+        <ImageView
+            android:id="@+id/podCastImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/activity1"
+            android:scaleType="fitXY"/>
+
+
+        <TextView
+            android:background="#80000000"
+            android:id="@+id/podCastText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="ddddddddddddddddddddd"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:textSize="@dimen/_10sdp"/>
+
+    </RelativeLayout>
+
+</layout>

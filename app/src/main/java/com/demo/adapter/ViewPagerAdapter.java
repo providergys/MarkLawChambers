@@ -5,6 +5,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.demo.fragment.CaseUpdateFragment;
+import com.demo.fragment.FragmentArticles;
+import com.demo.fragment.FragmentPodCast;
 import com.demo.fragment.FragmentVideo;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -22,11 +24,11 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         }
         else if (position == 1)
         {
-            fragment = new FragmentVideo();
+            fragment = new FragmentPodCast();
         }
         else if (position == 2)
         {
-            fragment = new FragmentVideo();
+            fragment = new FragmentArticles();
         }
         return fragment;
     }

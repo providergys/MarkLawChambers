@@ -3,6 +3,8 @@ package com.demo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +44,13 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
         final TeamResponse.TeampostsBean myListData = listdata.get(position);
         holder.binding.teamTitleText.setText(myListData.getTitle());
         holder.binding.teamdescText.setText(myListData.getContent());
-      //  Glide.with(context).load(myListData.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.binding.teamProfileImage);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.binding.teamdescText.setText(Html.fromHtml((myListData.getContent()), Html.FROM_HTML_MODE_COMPACT));
+        }
+
+
+
+        //  Glide.with(context).load(myListData.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.binding.teamProfileImage);
 
 
         Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);

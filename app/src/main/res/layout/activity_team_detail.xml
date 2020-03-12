@@ -25,8 +25,8 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_below="@+id/backTeam"
             android:id="@+id/teamImage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_200sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/activity1"
             android:scaleType="fitXY"
             android:padding="@dimen/_10sdp"/>

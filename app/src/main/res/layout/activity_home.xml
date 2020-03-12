@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
@@ -63,8 +63,8 @@
                                 android:layout_weight="1"
                                 android:background="@drawable/custom_linear"
                                 android:gravity="center"
-                                android:orientation="vertical"
-                                android:onClick="caseUpdateClick">
+                                android:onClick="caseUpdateClick"
+                                android:orientation="vertical">
 
                                 <ImageView
                                     android:layout_width="@dimen/_20sdp"
@@ -89,7 +89,7 @@
                                 android:id="@+id/practiceLn"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
-                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
                                 android:layout_weight="1"
                                 android:background="@drawable/custom_linear"
                                 android:gravity="center"
@@ -309,7 +309,7 @@
                     android:paddingLeft="@dimen/_20sdp"
                     android:paddingRight="@dimen/_20sdp">
 
-                    <ImageView
+                <!--    <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_100sdp"
                         android:scaleType="fitXY"
@@ -332,7 +332,14 @@
                             android:textStyle="bold" />
 
 
-                    </LinearLayout>
+                    </LinearLayout>-->
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/scroll_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none" />
 
 
                     <TextView
@@ -356,8 +363,8 @@
                         android:id="@+id/recent_activity_recycler"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:scrollbars="none"
-                        android:layout_marginTop="@dimen/_10sdp" />
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:scrollbars="none" />
                 </LinearLayout>
 
 
@@ -426,9 +433,9 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:onClick="reachUs"
                         android:layout_width="@dimen/_20sdp"
                         android:layout_height="@dimen/_20sdp"
+                        android:onClick="reachUs"
                         android:src="@drawable/reach" />
 
                     <TextView
@@ -443,11 +450,11 @@
 
 
                 <LinearLayout
-                    android:onClick="settingLn"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:onClick="settingLn"
                     android:orientation="vertical">
 
                     <ImageView
@@ -464,7 +471,6 @@
                         android:textSize="@dimen/_8sdp"
                         android:textStyle="bold" />
                 </LinearLayout>
-
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>

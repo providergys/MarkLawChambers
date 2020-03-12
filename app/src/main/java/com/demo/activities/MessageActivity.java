@@ -42,6 +42,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.Random;
 
 import retrofit2.Call;
@@ -64,7 +65,7 @@ public class MessageActivity extends AppCompatActivity {
     Activity ac;
     String senderId = "", groupId = "", finalReciver = "", isGroup, reciverId = "", chatSenderId = "", groupName = "", readreciverId;
     RelativeLayout mainLayout;
-    private int mInterval = 5000; // 5 seconds by default, can be changed later
+    private int mInterval = 10000; // 5 seconds by default, can be changed later
     private Handler mHandler;
     //    List<Chat> chats = new ArrayList<Chat>();
     Boolean fromAddbtn = false, shipOwner = false;
@@ -85,7 +86,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private double startTime = 0;
     private double finalTime = 0;
-
+    int x;
     Runnable runnable;
 
 
@@ -93,6 +94,10 @@ public class MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        setContentView(R.layout.activity_message);
+
+
+        Log.e("random",""+x);
         init();
 
     }
@@ -137,15 +142,9 @@ public class MessageActivity extends AppCompatActivity {
 
         sendAudio();
 
-
-
-
-
-
-
         retrofitGetChatMessages();
-      /*  mHandler = new Handler();
-        startRepeatingTask();*/
+        mHandler = new Handler();
+        startRepeatingTask();
 
     }
 
@@ -153,50 +152,76 @@ public class MessageActivity extends AppCompatActivity {
         audio_btn.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                  //  startRecording();
 
-                    Toast.makeText(MessageActivity.this, "Hold To Record.!", Toast.LENGTH_SHORT).show();
+                if(checkPermission()){
 
-                    if(checkPermission()) {
 
-                        AudioSavePathInDevice =
-                                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
-                                        "123121" + "AudioRecordingGeet.mp3";
-
-                        MediaRecorderReady();
-
-                        try {
+                    if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
 
 
 
 
-                            mediaRecorder.prepare();
-                            mediaRecorder.start();
 
+                        //  startRecording();
 
-                        } catch (IllegalStateException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(MessageActivity.this, "Hold To Record.!", Toast.LENGTH_SHORT).show();
 
 
 
+                            AudioSavePathInDevice =
+                                    Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
+                                            "123121" + "AudioRecordingGeet.mp3";
 
-                    } else {
-                        requestPermission();
+                            MediaRecorderReady();
+
+                            try {
+
+                                mediaRecorder.prepare();
+                                mediaRecorder.start();
+
+
+                            } catch (IllegalStateException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+
+
+
+
+
+
+
+
+
+
                     }
 
-                } else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    else if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                        mediaRecorder.stop();
+                        mediaRecorder.release();
+                        mediaRecorder = null;
+                        //Do Nothing
+                        //   stopRecording();
+                        //     mediaRecorder.stop();
 
-                    //Do Nothing
-                   // stopRecording();
-                  //  mediaRecorder.stop();
-                    Toast.makeText(MessageActivity.this, "Recorded.!", Toast.LENGTH_SHORT).show();
+
+
+                        Toast.makeText(MessageActivity.this, "Recorded.!", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
+
+                else {
+
+                    requestPermission();
+
+                }
+
+
+               /* */
 
                 return false;
             }
@@ -385,14 +410,14 @@ public class MessageActivity extends AppCompatActivity {
         }
     };
 
-    /*void startRepeatingTask() {
+    void startRepeatingTask() {
         mStatusChecker.run();
     }
 
     void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
     }
-*/
+
 
 
     // send audio to server
@@ -407,7 +432,7 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
-       // stopRepeatingTask();
+        stopRepeatingTask();
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
@@ -418,16 +443,11 @@ public class MessageActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //stopRepeatingTask();
+        stopRepeatingTask();
     }
     @Override
     protected void onStop() {
-       // stopRepeatingTask();
+    stopRepeatingTask();
         super.onStop();
     }
-
-
-
-
-
 }

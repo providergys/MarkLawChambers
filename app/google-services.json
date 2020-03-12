@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "34432343770",
+    "firebase_url": "https://marklawchambers-7c9fd.firebaseio.com",
+    "project_id": "marklawchambers-7c9fd",
+    "storage_bucket": "marklawchambers-7c9fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34432343770:android:9669290be0d2a9d2340fe3",
+        "android_client_info": {
+          "package_name": "com.demo.marklaw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34432343770-2l6inqg2cr5stajl22m4bprpvc41sjbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.demo.marklaw",
+            "certificate_hash": "8618fe78211feba1466ffd4e4f59a4553796c9d3"
+          }
+        },
+        {
+          "client_id": "34432343770-ke78gnqt3jk0or249rnmn60bat3i7p0u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZyWOKEZESY0vZqI-F4umaInLFHUIcG-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34432343770-ke78gnqt3jk0or249rnmn60bat3i7p0u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

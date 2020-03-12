@@ -1,38 +1,22 @@
 package com.demo.model;
 
 public class PodCastList {
-    String mTitle,mDate;
-    int mImage;
+
+    String mImage;
 
 
-    public PodCastList(String mTitle, String mDate, int mImage) {
-        this.mTitle = mTitle;
-        this.mDate = mDate;
+    public PodCastList(String mImage) {
+
         this.mImage = mImage;
     }
 
 
-    public String getmTitle() {
-        return mTitle;
-    }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
-
-    public String getmDate() {
-        return mDate;
-    }
-
-    public void setmDate(String mDate) {
-        this.mDate = mDate;
-    }
-
-    public int getmImage() {
+    public String getmImage() {
         return mImage;
     }
 
-    public void setmImage(int mImage) {
+    public void setmImage(String mImage) {
         this.mImage = mImage;
     }
 }

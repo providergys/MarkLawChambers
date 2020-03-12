@@ -22,10 +22,10 @@
 
                 <TextView
                     android:id="@+id/caseTitle"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/arrowln"
-                    android:text="zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz"
+                    android:text="ffffffdddd"
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
-                android:text=""
+                android:text="ccccccccccccccccccccccc"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>

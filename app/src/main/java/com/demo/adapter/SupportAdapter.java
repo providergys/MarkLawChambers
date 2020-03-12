@@ -3,6 +3,8 @@ package com.demo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +42,10 @@ public class SupportAdapter extends RecyclerView.Adapter<SupportAdapter.ViewHold
     public void onBindViewHolder(SupportAdapter.ViewHolder holder, int position) {
      final TeamResponse.SupportingpostsBean myListData = listdata.get(position);
         holder.binding.teamTitleText.setText(myListData.getTitle());
-        holder.binding.teamdescText.setText(myListData.getContent());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.binding.teamdescText.setText(Html.fromHtml((myListData.getContent()), Html.FROM_HTML_MODE_COMPACT));
+        }
         holder.binding.teamreadText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
