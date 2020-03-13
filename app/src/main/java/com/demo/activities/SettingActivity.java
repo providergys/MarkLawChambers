@@ -141,7 +141,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void back(View view) {
-        startActivity(new Intent(SettingActivity.this, HomeActivity.class));
+        startActivity(new Intent(SettingActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
     }
 

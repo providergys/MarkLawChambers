@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.demo.activities.HomeActivity;
 import com.demo.activities.SharingActivity;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.BothItemListBinding;

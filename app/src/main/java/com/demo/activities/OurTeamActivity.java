@@ -39,11 +39,19 @@ public class OurTeamActivity extends AppCompatActivity {
             public void onResponse(Call<TeamResponse> call, Response<TeamResponse> response) {
 
                 if (response.isSuccessful()) {
-                    prog.hideProg();
-                    setTeamAdapter(response.body().getTeamposts());
-                    setAdvisorAdapter(response.body().getAdvisorposts());
-                    setSupportingAdapter(response.body().getSupportingposts());
-                } else {
+
+                    if(response.body().getRespCode().equals("1003")) {
+                        prog.hideProg();
+                        setTeamAdapter(response.body().getTeamposts());
+                        setAdvisorAdapter(response.body().getAdvisorposts());
+                        setSupportingAdapter(response.body().getSupportingposts());
+
+                    }
+
+                }
+
+
+                    else {
                     prog.hideProg();
                     Toast.makeText(getApplicationContext(), response.body().getMessage(), Toast.LENGTH_LONG).show();
                 }
@@ -96,7 +104,7 @@ public class OurTeamActivity extends AppCompatActivity {
     }
 
     public void home(View view) {
-        startActivity(new Intent(OurTeamActivity.this, HomeActivity.class));
+        startActivity(new Intent(OurTeamActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
     public void reachUs(View view) {

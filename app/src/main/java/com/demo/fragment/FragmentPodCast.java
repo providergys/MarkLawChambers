@@ -18,6 +18,7 @@ import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityFragmentVideoBinding;
 import com.demo.model.SharingResponse;
 import com.demo.retroutility.MainApplication;
+import com.demo.utility.ProgDialog;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,19 +29,24 @@ import static com.facebook.FacebookSdk.getApplicationContext;
 public class FragmentPodCast  extends Fragment {
     ActivityFragmentVideoBinding binding;
     PodCastAdapter sharingPosdCastAdapter;
-
+    ProgDialog prog = new ProgDialog();
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.activity_fragment_video, container, false);
         View view = binding.getRoot();
+        prog.progDialog(getActivity());
         MainApplication.getApiService().getSharing("application/json").enqueue(new Callback<SharingResponse>() {
             @Override
             public void onResponse(Call<SharingResponse> call, Response<SharingResponse> response) {
                 if (response.isSuccessful()) {
-                    // video data
-                    GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
-                    sharingPosdCastAdapter = new PodCastAdapter(getApplicationContext(), response.body().getPodcastposts());
-                    binding.videoRecycler.setLayoutManager(manager);
-                    binding.videoRecycler.setAdapter(sharingPosdCastAdapter);
+
+                    if (response.body().getRespCode().equals("1003")) {
+                        // video data
+                        prog.hideProg();
+                        GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 2, GridLayoutManager.VERTICAL, false);
+                        sharingPosdCastAdapter = new PodCastAdapter(getApplicationContext(), response.body().getPodcastposts());
+                        binding.videoRecycler.setLayoutManager(manager);
+                        binding.videoRecycler.setAdapter(sharingPosdCastAdapter);
+                    }
                 }
             }
 

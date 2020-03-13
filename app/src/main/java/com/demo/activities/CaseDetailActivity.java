@@ -25,7 +25,6 @@ public class CaseDetailActivity extends AppCompatActivity {
         binding.caseDetailText.setText(getIntent().getStringExtra("caseTitle"));
         Bundle bundle = getIntent().getExtras();
         ArrayList<? extends CasesResponse.PostsDataBean.CasesBean> arraylist = bundle.getParcelableArrayList("selectedContacts");
-
         binding.caseDetailRecycler.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         caseUpdateAdapter = new CaseDetailAdapter(getApplicationContext(), arraylist);
         binding.caseDetailRecycler.setAdapter(caseUpdateAdapter);

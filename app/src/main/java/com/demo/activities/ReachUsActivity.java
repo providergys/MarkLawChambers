@@ -69,7 +69,7 @@ public class ReachUsActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     if(response.body().getRespCode().equals("7022")){
                         Toast.makeText(getApplicationContext(),"Message Sent",Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(ReachUsActivity.this,HomeActivity.class));
+                        startActivity(new Intent(ReachUsActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 }
             }

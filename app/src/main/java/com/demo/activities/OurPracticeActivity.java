@@ -62,7 +62,7 @@ public class OurPracticeActivity extends AppCompatActivity {
         startActivity(new Intent(OurPracticeActivity.this,SettingActivity.class));
     }
     public void home(View view){
-        startActivity(new Intent(OurPracticeActivity.this,HomeActivity.class));
+        startActivity(new Intent(OurPracticeActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
     public void reachUs(View view){

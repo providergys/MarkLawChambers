@@ -54,11 +54,13 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home);
+        ac = HomeActivity.this;
+
         init();
     }
 
     private void init() {
-        ac = HomeActivity.this;
+
         mSharedPref = new UserSharedPreferences(ac);
         Log.e("userIdHome", "" + String.valueOf(mSharedPref.getString(Constants.USER_ID)));
         if (mSharedPref.getString(Constants.USER_TYPE).equals("Client")) {
@@ -66,7 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             binding.withoutCaseRel.setVisibility(View.VISIBLE);
         }
-        getActivities();
+
         binding.practiceLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +87,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(ac, OurTeamActivity.class));
+
             }
         });
 
@@ -98,22 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         binding.sharingLn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*final Dialog dialog = new Dialog(ac);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.comingsoondialog);
-                dialog.setCanceledOnTouchOutside(true);
-                Button btnOk = dialog.findViewById(R.id.btnCancel);
-                dialog.show();
-                btnOk.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-
-                    }
-                });*/
-
-
-                startActivity(new Intent(HomeActivity.this,SharingActivity.class));
+               startActivity(new Intent(HomeActivity.this,SharingActivity.class));
             }
         });
 
@@ -182,7 +170,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
+getActivities();
 
     }
 
@@ -205,67 +193,43 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<RecentResponse> call, final Response<RecentResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     if (response.body().getRespCode().equals("1003")) {
-                        binding.recentActivityRecycler.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.HORIZONTAL, false));
+
+
+                        Log.e("res",""+response.body());
+                        final int time = 4000; // it's the delay time for sliding between items in recyclerview
+
+
                         recentActivityAdapter = new RecentActivityAdapter(ac, response.body().getPosts_data());
                         binding.recentActivityRecycler.setAdapter(recentActivityAdapter);
 
+                         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+
+                        //final GridLayoutManager manager = new GridLayoutManager(getApplicationContext(), 3, GridLayoutManager.HORIZONTAL, false);
 
 
+                        binding.recentActivityRecycler.setLayoutManager(linearLayoutManager);
 
+                        final LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+                        linearSnapHelper.attachToRecyclerView(binding.recentActivityRecycler);
 
+                        final Timer timer = new Timer();
+                        timer.schedule(new TimerTask() {
 
-
-
-                    /*    binding.scrollRecycler.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.HORIZONTAL, false));
-                        recentActivityAdapter = new RecentActivityAdapter(ac, response.body().getPosts_data());
-                        binding.scrollRecycler.setAdapter(recentActivityAdapter);
-                        binding.scrollRecycler.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                            @Override
-                            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                                super.onScrolled(recyclerView, dx, dy);
-
-                                firstItem=layoutManager.findFirstVisibleItemPosition();
-
-                                if (firstItem != 1 && firstItem % response.body().getPosts_data().size() == 1) {
-                                    layoutManager.scrollToPosition(1);
-                                }
-                                 firstCompletelyItemVisible = layoutManager.findFirstCompletelyVisibleItemPosition();
-                                if (firstCompletelyItemVisible == 0) {
-                                    layoutManager.scrollToPositionWithOffset(response.body().getPosts_data().size(), 0);
-                                }
-                            }
-                        });*/
-
-
-
-
-
-/*
-                        final int speedScroll = 2000;
-                        final Handler handler = new Handler();
-                        final Runnable runnable = new Runnable() {
-                            int count = 0;
                             @Override
                             public void run() {
+                                if (linearLayoutManager.findLastCompletelyVisibleItemPosition() < (recentActivityAdapter.getItemCount() - 2)) {
 
-                                Log.e("coount","--------------"+count);
-                                if(count < response.body().getPosts_data().size()){
-                                    binding.scrollRecycler.scrollToPosition(++count);
-                                    handler.postDelayed(this,speedScroll);
+                                    linearLayoutManager.smoothScrollToPosition(binding.recentActivityRecycler, new RecyclerView.State(),
+                                            linearLayoutManager.findLastCompletelyVisibleItemPosition() + 2);
                                 }
 
+                                else if (linearLayoutManager.findLastCompletelyVisibleItemPosition() == (recentActivityAdapter.getItemCount() - 2)) {
 
-                            else if(count==response.body().getPosts_data().size()){
-
-                                    binding.scrollRecycler.scrollToPosition(0);
-                                    handler.postDelayed(this,speedScroll);
+                                    linearLayoutManager.smoothScrollToPosition(binding.recentActivityRecycler, new RecyclerView.State(), 0);
                                 }
-
-
                             }
-                        };
+                        }, 0, time);
 
-                        handler.postDelayed(runnable,speedScroll);*/
 
 
                     } else {
@@ -283,7 +247,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public void settingLn(View view) {
         startActivity(new Intent(HomeActivity.this, SettingActivity.class));
-        finish();
+
 
     }
 
@@ -297,4 +261,6 @@ public class HomeActivity extends AppCompatActivity {
     public void reachUs(View view){
       startActivity(new Intent(HomeActivity.this,ReachUsActivity.class));
     }
+
+
 }

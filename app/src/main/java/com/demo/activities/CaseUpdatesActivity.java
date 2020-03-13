@@ -92,7 +92,7 @@ public class CaseUpdatesActivity extends AppCompatActivity {
             }
         });
     }
-    // loadFragment(new CaseUpdateFragment());
+
 
 
     public void back(View view) {
@@ -100,20 +100,12 @@ public class CaseUpdatesActivity extends AppCompatActivity {
     }
 
 
-  /*  private void loadFragment(Fragment fragment) {
-        // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.caseFragment, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }*/
-
     public void settingLn(View view) {
         startActivity(new Intent(CaseUpdatesActivity.this, SettingActivity.class));
     }
 
     public void home(View view) {
-        startActivity(new Intent(CaseUpdatesActivity.this, HomeActivity.class));
+        startActivity(new Intent(CaseUpdatesActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
     }
 
     public void reachUs(View view) {
@@ -136,49 +128,7 @@ public class CaseUpdatesActivity extends AppCompatActivity {
                         InVoiceAdapter caseUpdateAdapter = new InVoiceAdapter(ac, response.body().getInvoices());
                         binding.invoiceRecycler.setAdapter(caseUpdateAdapter);
 
-                      /*  binding.transactionRecycler.setLayoutManager(new LinearLayoutManager(ac, LinearLayoutManager.VERTICAL, false));
-                        TransacionHistoryAdapter caseUpdateAdapter = new TransacionHistoryAdapter(ac, response.body().getInvoices().get(0).getPaid_amount());
-                        binding.transactionRecycler.setAdapter(caseUpdateAdapter);
-                        binding.amountPay.setText(response.body().getInvoices().get(0).getInvoice_amount());
-                        binding.amountPending.setText(response.body().getInvoices().get(0).getPending_amount());
-                        binding.payBtn.setVisibility(View.VISIBLE);
-                        binding.amountPay.setVisibility(View.VISIBLE);
-                        binding.invoicetext.setVisibility(View.VISIBLE);
-                        binding.pendingText.setVisibility(View.VISIBLE);
-                        binding.amountPending.setVisibility(View.VISIBLE);
-                        binding.pdfView.setVisibility(View.VISIBLE);
 
-
-
-                        binding.pdfView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View  view) {
-
-                                Log.e("pdfOnVoice",""+response.body().getInvoices().get(0).getInvoice_detail());
-
-
-                                Intent intent=new Intent(CaseUpdatesActivity.this, PdfViewActivity.class);
-                                intent.putExtra("pdfLink",response.body().getInvoices().get(0).getInvoice_detail());
-                                 startActivity(intent);
-
-                            }
-                        });
-
-
-                        binding.payBtn.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Intent intent = new Intent(ac, InVoiceActivity.class);
-                                intent.putExtra(Constants.INVOICE_ID, response.body().getInvoices().get(0).getId());
-                                intent.putExtra(Constants.INVOICE_NUMBER, response.body().getInvoices().get(0).getInvoice_number());
-                                intent.putExtra(Constants.INVOICE_AMOUNT, response.body().getInvoices().get(0).getInvoice_amount());
-                                intent.putExtra(Constants.INVOICE_CURRENCY, response.body().getInvoices().get(0).getCurrency());
-                                intent.putExtra(Constants.INVOICE_PENDING, response.body().getInvoices().get(0).getPending_amount());
-                                startActivity(intent);
-
-
-                            }
-                        });*/
 
                     } else if (response.body().getRespCode().equals("7021")) {
                         //    Toast.makeText(ac, response.body().getMessage(), Toast.LENGTH_LONG).show();

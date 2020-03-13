@@ -20,7 +20,6 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="com.demo.activities.ReceiptActivity"></activity>
-        <activity android:name="com.demo.activities.FbVDemo"></activity>
         <activity android:name="com.demo.fragment.FragmentArticles" />
         <activity android:name="com.demo.fragment.FragmentPodCast" />
         <activity android:name="com.demo.activities.VDemoNew" />

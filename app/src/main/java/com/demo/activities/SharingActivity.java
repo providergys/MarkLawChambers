@@ -40,7 +40,8 @@ public class SharingActivity extends AppCompatActivity {
 
 
     public  void back(View view){
-        startActivity(new Intent(SharingActivity.this,HomeActivity.class));
+        startActivity(new Intent(SharingActivity.this,HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
     }
 
 }

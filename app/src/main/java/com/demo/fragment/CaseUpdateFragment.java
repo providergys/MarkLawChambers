@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.demo.activities.CaseUpdatesActivity;
 import com.demo.activities.InVoiceActivity;
-import com.demo.activities.MainActivity;
 import com.demo.adapter.CaseUpdateAdapter;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityCaseUpdateFragmentBinding;
