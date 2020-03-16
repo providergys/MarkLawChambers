@@ -52,6 +52,7 @@ public class SplashScreen extends Activity {
                 String newToken = instanceIdResult.getToken();
                 Log.e("newToken",newToken);
 
+
             }
         });
         mSharedPref = new UserSharedPreferences(ac);

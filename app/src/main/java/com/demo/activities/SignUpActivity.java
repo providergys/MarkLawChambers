@@ -30,6 +30,9 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,11 +53,20 @@ public class SignUpActivity extends AppCompatActivity {
     String accessToken;
     ProgDialog prog = new ProgDialog();
     UserSharedPreferences mSharedPref;
-
+    String newToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_sign_up);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( SignUpActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+               newToken = instanceIdResult.getToken();
+                Log.e("newToken",newToken);
+
+
+            }
+        });
         init();
 
     }
@@ -111,6 +123,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     loginRequest.setUsername(first_name);
                                     loginRequest.setLogintype("A");
                                     loginRequest.setUsertype("Non Client");
+                                    loginRequest.setDevicetype("A");
+                                    loginRequest.setDevicetoken(newToken);
                                     MainApplication.getApiService().loginFbMethod("application/json", loginRequest).enqueue(new Callback<LoginFbResponse>() {
                                         @Override
                                         public void onResponse(Call<LoginFbResponse> call, Response<LoginFbResponse> response) {
@@ -174,13 +188,17 @@ public class SignUpActivity extends AppCompatActivity {
 
 
     public void retrofitLogin() {
+
+
+
         LoginRequest loginRequest = new LoginRequest();
         prog.progDialog(ac);
         loginRequest.setUsername(binding.userNameEdt.getText().toString());
         loginRequest.setEmail(binding.emailEdt.getText().toString());
         loginRequest.setPassword(binding.passEdt.getText().toString());
         loginRequest.setMobile_number(binding.numberEdt.getText().toString());
-
+        loginRequest.setDevicetype("A");
+        loginRequest.setDevicetoken(newToken);
         //Show Your Progress Dialog
 
 

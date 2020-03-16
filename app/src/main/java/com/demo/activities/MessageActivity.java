@@ -159,10 +159,6 @@ public class MessageActivity extends AppCompatActivity {
     }
 
     private void sendAudio() {
-
-
-
-
         audio_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -289,10 +285,6 @@ public class MessageActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-
-
-
             }
         });
 

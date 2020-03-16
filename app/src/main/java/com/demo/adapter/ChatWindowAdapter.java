@@ -287,7 +287,7 @@ public class ChatWindowAdapter extends RecyclerView.Adapter<ChatWindowAdapter.My
                             mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
                                 @Override
                                 public void onCompletion(MediaPlayer mediaPlayer) {
-                                    Toast.makeText(context, "Completed", Toast.LENGTH_LONG).show();
+
                                     holder.pb.setVisibility(View.GONE);
 
                                 }
@@ -297,8 +297,6 @@ public class ChatWindowAdapter extends RecyclerView.Adapter<ChatWindowAdapter.My
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 });
 

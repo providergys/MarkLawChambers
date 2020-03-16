@@ -63,6 +63,11 @@ public class HomeActivity extends AppCompatActivity {
 
         mSharedPref = new UserSharedPreferences(ac);
         Log.e("userIdHome", "" + String.valueOf(mSharedPref.getString(Constants.USER_ID)));
+
+
+        Log.e("usertype",""+mSharedPref.getString(Constants.USER_TYPE).equals("Client"));
+
+
         if (mSharedPref.getString(Constants.USER_TYPE).equals("Client")) {
             binding.withCaseRel.setVisibility(View.VISIBLE);
         } else {

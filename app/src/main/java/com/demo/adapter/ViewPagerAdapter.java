@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.demo.fragment.CaseUpdateFragment;
 import com.demo.fragment.FragmentArticles;
 import com.demo.fragment.FragmentPodCast;
 import com.demo.fragment.FragmentVideo;

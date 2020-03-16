@@ -21,6 +21,8 @@ public class LoginRequest {
     private String currentpassword;
     private String newpassword;
     private String user_id;
+    private String devicetype;
+    private String devicetoken;
 
     public String getCurrentpassword() {
         return currentpassword;
@@ -28,6 +30,22 @@ public class LoginRequest {
 
     public String getUser_id() {
         return user_id;
+    }
+
+    public String getDevicetype() {
+        return devicetype;
+    }
+
+    public void setDevicetype(String devicetype) {
+        this.devicetype = devicetype;
+    }
+
+    public String getDevicetoken() {
+        return devicetoken;
+    }
+
+    public void setDevicetoken(String devicetoken) {
+        this.devicetoken = devicetoken;
     }
 
     public void setUser_id(String user_id) {

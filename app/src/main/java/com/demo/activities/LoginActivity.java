@@ -28,6 +28,10 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Arrays;
@@ -45,11 +49,20 @@ public class LoginActivity extends Activity {
     String accessToken;
     ProgDialog prog = new ProgDialog();
     UserSharedPreferences mSharedPref;
-
+    String newToken;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener( LoginActivity.this,  new OnSuccessListener<InstanceIdResult>() {
+            @Override
+            public void onSuccess(InstanceIdResult instanceIdResult) {
+                newToken = instanceIdResult.getToken();
+                Log.e("newToken",newToken);
+
+
+            }
+        });
         init();
     }
 
@@ -105,7 +118,8 @@ public class LoginActivity extends Activity {
                                     loginRequest.setUsername(first_name);
                                     loginRequest.setLogintype("A");
                                     loginRequest.setUsertype("Non Client");
-
+                                    loginRequest.setDevicetype("A");
+                                    loginRequest.setDevicetoken(newToken);
                                     MainApplication.getApiService().loginFbMethod("application/json", loginRequest).enqueue(new Callback<LoginFbResponse>() {
                                         @Override
                                         public void onResponse(Call<LoginFbResponse> call, Response<LoginFbResponse> response) {
@@ -186,10 +200,14 @@ public class LoginActivity extends Activity {
     }
 
     public void retrofitLogin() {
+
+
         LoginRequest loginRequest = new LoginRequest();
         prog.progDialog(ac);
         loginRequest.setUsername(binding.emailEdit.getText().toString());
         loginRequest.setPassword(binding.passEdit.getText().toString());
+        loginRequest.setDevicetype("A");
+        loginRequest.setDevicetoken(newToken);
 
         MainApplication.getApiService().loginMethod("application/json", loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
