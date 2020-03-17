@@ -65,6 +65,16 @@ public class AllDatatAdapter extends RecyclerView.Adapter<AllDatatAdapter.ViewHo
         Glide.with(getApplicationContext()).load(data.getImage()).centerCrop()
                     .error(mDefaultBackground).into(holder.binding.bothImage);
 
+
+
+
+
+
+
+
+
+
+
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {

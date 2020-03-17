@@ -3,6 +3,7 @@ package com.demo.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Html;
@@ -20,11 +21,18 @@ import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.TeamItemListBinding;
 import com.demo.model.TeamResponse;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import retrofit2.http.Url;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -53,32 +61,19 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
             holder.binding.teamdescText.setText(Html.fromHtml((myListData.getContent()), Html.FROM_HTML_MODE_COMPACT));
         }
 
+        RequestOptions myOptions = new RequestOptions()
+                .override(100, 100);
+
+        Glide.with(context)
+                .asBitmap()
+                .apply(myOptions)
+                .load(myListData.getImage())
+                .into(holder.binding.teamProfileImage);
 
 
-        //  Glide.with(context).load(myListData.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.binding.teamProfileImage);
-
-      //  Bitmap bitmap = Bitmap.createScaledBitmap(holder.binding.teamProfileImage, width, height, true);
-
-
-        File compressedImgFile = null;
-        try {
-            compressedImgFile = new Compressor(context).compressToFile(new File(myListData.getImage()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        Bitmap compressedImgBitmap = null;
-        try {
-            compressedImgBitmap = new Compressor(context).compressToBitmap(compressedImgFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);
-        Glide.with(getApplicationContext()).load(compressedImgBitmap).centerCrop()
-                .error(mDefaultBackground).into(holder.binding.teamProfileImage);
+     /*   Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);
+        Glide.with(getApplicationContext()).load(myListData.getImage()).centerCrop()
+                .error(mDefaultBackground).into(holder.binding.teamProfileImage);*/
 
 
 

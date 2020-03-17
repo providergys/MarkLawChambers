@@ -70,7 +70,10 @@ public class CaseUpdatesActivity extends AppCompatActivity {
 
     private void init() {
 
-        MainApplication.getApiService().getCasesMethod("application/json").enqueue(new Callback<CasesResponse>() {
+        LoginRequest loginRequest=new LoginRequest();
+        loginRequest.setUser_id(mSharedPref.getString(Constants.USER_ID));
+
+        MainApplication.getApiService().getCasesMethod("application/json",loginRequest).enqueue(new Callback<CasesResponse>() {
             @Override
             public void onResponse(Call<CasesResponse> call, Response<CasesResponse> response) {
                 if (response.isSuccessful()) {

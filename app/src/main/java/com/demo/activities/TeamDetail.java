@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.ActivityTeamDetailBinding;
 
@@ -21,7 +22,17 @@ public class TeamDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_detail);
-        Glide.with(getApplicationContext()).load(getIntent().getStringExtra("teamImage")).into(binding.teamImage);
+
+        RequestOptions myOptions = new RequestOptions()
+                .override(500, 500);
+        Glide.with(this)
+                .asBitmap()
+                .apply(myOptions)
+                .load(getIntent().getStringExtra("teamImage"))
+                .into(binding.teamImage);
+
+
+      //  Glide.with(getApplicationContext()).load(getIntent().getStringExtra("teamImage")).into(binding.teamImage);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

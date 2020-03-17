@@ -53,8 +53,8 @@ public interface ApiCalls {
 
 
     // case api
-    @GET("case_studies")
-    Call<CasesResponse> getCasesMethod(@Header("Content-Type") String contentType);
+    @POST("case_studies")
+    Call<CasesResponse> getCasesMethod(@Header("Content-Type") String contentType,@Body LoginRequest loginRequest);
 
 
     // practices api
