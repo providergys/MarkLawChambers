@@ -43,6 +43,7 @@ public class CaseDetailAdapter extends RecyclerView.Adapter<CaseDetailAdapter.Vi
             public void onClick(View view) {
                 Intent intent=new Intent(context, PdfViewActivity.class);
                 intent.putExtra("pdfLink",myListData.getFile());
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

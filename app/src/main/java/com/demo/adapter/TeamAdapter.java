@@ -2,6 +2,7 @@ package com.demo.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.Html;
@@ -19,7 +20,11 @@ import com.demo.marklaw.R;
 import com.demo.marklaw.databinding.TeamItemListBinding;
 import com.demo.model.TeamResponse;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import id.zelory.compressor.Compressor;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -52,15 +57,36 @@ public class TeamAdapter extends RecyclerView.Adapter<TeamAdapter.ViewHolder> {
 
         //  Glide.with(context).load(myListData.getImage()).apply(RequestOptions.circleCropTransform()).into(holder.binding.teamProfileImage);
 
+      //  Bitmap bitmap = Bitmap.createScaledBitmap(holder.binding.teamProfileImage, width, height, true);
+
+
+        File compressedImgFile = null;
+        try {
+            compressedImgFile = new Compressor(context).compressToFile(new File(myListData.getImage()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        Bitmap compressedImgBitmap = null;
+        try {
+            compressedImgBitmap = new Compressor(context).compressToBitmap(compressedImgFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         Drawable mDefaultBackground = context.getResources().getDrawable(R.drawable.placeholder);
-        Glide.with(getApplicationContext()).load(myListData.getImage()).centerCrop()
+        Glide.with(getApplicationContext()).load(compressedImgBitmap).centerCrop()
                 .error(mDefaultBackground).into(holder.binding.teamProfileImage);
+
+
 
         holder.binding.teamreadText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, TeamDetail.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 .putExtra("teamImage",myListData.getImage()).putExtra("Description",myListData.getContent()));
             }
         });

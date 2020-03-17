@@ -220,9 +220,15 @@ public class MessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                mediaRecorder.stop();
-                mediaRecorder.release();
-                mediaRecorder = null;
+
+                try{
+                    mediaRecorder.stop();
+                    mediaRecorder.release();
+                    mediaRecorder = null;
+                }
+               catch (Exception e){
+
+               }
 
 
                 Log.e("AudioSavePathInDevice", "" + AudioSavePathInDevice);

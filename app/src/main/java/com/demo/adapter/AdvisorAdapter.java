@@ -58,6 +58,7 @@ public class AdvisorAdapter extends RecyclerView.Adapter<AdvisorAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 context.startActivity(new Intent(context, TeamDetail.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra("teamImage",myListData.getImage()).putExtra("Description",myListData.getContent()));
 
             }
