@@ -49,7 +49,8 @@ public class SupportAdapter extends RecyclerView.Adapter<SupportAdapter.ViewHold
         holder.binding.teamreadText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, TeamDetail.class)
+                context.startActivity(new Intent(context, TeamDetail.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
                         .putExtra("teamImage",myListData.getImage()).putExtra("Description",myListData.getContent()));
             }
         });

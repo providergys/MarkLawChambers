@@ -59,7 +59,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Date : "
+                            android:text="102000 "
                             android:textColor="@color/colorPrimary" />
 
                     </LinearLayout>
@@ -68,7 +68,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:gravity="end">
+                        android:orientation="horizontal"
+                        android:gravity="start">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -78,10 +79,10 @@
 
                         <TextView
                             android:id="@+id/invoicePAmount"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
-                            android:text="200 : "
+                            android:text="1020000"
                             android:textColor="#EC1B0B" />
 
                     </LinearLayout>

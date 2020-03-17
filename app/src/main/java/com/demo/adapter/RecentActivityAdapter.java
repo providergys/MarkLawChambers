@@ -41,7 +41,7 @@ public class RecentActivityAdapter extends RecyclerView.Adapter<RecentActivityAd
         holder.binding.listLinear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               context.startActivity(new Intent(context, RecentDetailActivity.class).putExtra("content",myListData.getContent()).putExtra("image",myListData.getImage()));
+               context.startActivity(new Intent(context, RecentDetailActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("content",myListData.getContent()).putExtra("image",myListData.getImage()));
             }
         });
     }

@@ -59,6 +59,7 @@ public class CaseUpdateAdapter extends RecyclerView.Adapter<CaseUpdateAdapter.Vi
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CaseDetailActivity.class);
+                intent. addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("caseTitle",myListData.getTitle());
                 Bundle b = new Bundle();
                 b.putSerializable("selectedContacts", myListData.getCases());

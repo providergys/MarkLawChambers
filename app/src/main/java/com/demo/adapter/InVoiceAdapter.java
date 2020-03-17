@@ -54,6 +54,8 @@ public class InVoiceAdapter extends RecyclerView.Adapter<InVoiceAdapter.ViewHold
            @Override
            public void onClick(View view) {
                Intent intent=new Intent(context, PdfViewActivity.class);
+               intent. addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                intent.putExtra("pdfLink",listdata.get(position).getInvoice_detail().getInvoice_detail());
                context.startActivity(intent);
            }
@@ -63,6 +65,8 @@ public class InVoiceAdapter extends RecyclerView.Adapter<InVoiceAdapter.ViewHold
            @Override
            public void onClick(View view) {
                Intent intent = new Intent(context, InVoiceActivity.class);
+               intent. addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                intent.putExtra(Constants.INVOICE_ID,myListData.getInvoice_detail().getId());
                intent.putExtra(Constants.INVOICE_NUMBER, myListData.getInvoice_detail().getInvoice_number());
                intent.putExtra(Constants.INVOICE_AMOUNT, myListData.getInvoice_detail().getInvoice_amount());
@@ -78,6 +82,7 @@ public class InVoiceAdapter extends RecyclerView.Adapter<InVoiceAdapter.ViewHold
 
                holder.binding.hideTextNew.setVisibility(View.VISIBLE);
                holder.binding.moreTextNew.setVisibility(View.GONE);
+
                holder.binding.transactionRecycler.setVisibility(View.VISIBLE);
 
                holder.binding.transactionRecycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));

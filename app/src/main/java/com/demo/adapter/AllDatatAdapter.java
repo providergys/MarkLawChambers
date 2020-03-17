@@ -78,7 +78,7 @@ public class AllDatatAdapter extends RecyclerView.Adapter<AllDatatAdapter.ViewHo
     holder.itemView.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            context.startActivity(new Intent(context, SharingActivity.class));
+            context.startActivity(new Intent(context, SharingActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
         }
     });
     }

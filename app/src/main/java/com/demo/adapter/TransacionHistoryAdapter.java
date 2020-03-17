@@ -55,6 +55,7 @@ public class TransacionHistoryAdapter extends RecyclerView.Adapter<TransacionHis
             holder.binding.amountCheck.setVisibility(View.GONE);
             holder.binding.historyAmount.setVisibility(View.GONE);
             holder.binding.historyDate.setVisibility(View.GONE);
+            holder.binding.receiptText.setVisibility(View.GONE);
 
         }
 
@@ -63,10 +64,13 @@ public class TransacionHistoryAdapter extends RecyclerView.Adapter<TransacionHis
             holder.binding.amountCheck.setVisibility(View.VISIBLE);
             holder.binding.historyAmount.setText(myListData.getAmount());
             holder.binding.historyDate.setText(myListData.getPay_date());
+            holder.binding.receiptText.setVisibility(View.VISIBLE);
             holder.binding.receiptText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent=new Intent(context, PdfViewActivity.class);
+                    intent. addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
                     intent.putExtra("pdfLink",myListData.getInvoice_link());
                     context.startActivity(intent);
 

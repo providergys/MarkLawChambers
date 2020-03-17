@@ -1,10 +1,12 @@
 package com.demo.activities;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -65,7 +67,7 @@ public class MessageActivity extends AppCompatActivity {
     ChatWindowAdapter chatwindowAdapter;
 
     EditText message_edt;
-
+    public static final int MULTIPLE_PERMISSIONS = 100;
     SnakeBaar snakeBaar = new SnakeBaar();
     Activity ac;
     String senderId = "", groupId = "", finalReciver = "", isGroup, reciverId = "", chatSenderId = "", groupName = "", readreciverId;
@@ -164,7 +166,7 @@ public class MessageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 stop_btn.setVisibility(View.VISIBLE);
                 audio_btn.setVisibility(View.GONE);
-                 sendingText.setVisibility(View.VISIBLE);
+                sendingText.setVisibility(View.VISIBLE);
                 Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),
                         R.anim.myanimation);
                 sendingText.startAnimation(animation);
@@ -226,9 +228,9 @@ public class MessageActivity extends AppCompatActivity {
                     mediaRecorder.release();
                     mediaRecorder = null;
                 }
-               catch (Exception e){
+                catch (Exception e){
 
-               }
+                }
 
 
                 Log.e("AudioSavePathInDevice", "" + AudioSavePathInDevice);
@@ -365,7 +367,7 @@ public class MessageActivity extends AppCompatActivity {
                 }
 
 
-                *//* *//*
+                // //
 
                 return false;
             }
@@ -385,19 +387,7 @@ public class MessageActivity extends AppCompatActivity {
 
     }
 
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(MessageActivity.this, new
-                String[]{WRITE_EXTERNAL_STORAGE, RECORD_AUDIO}, RequestPermissionCode);
-    }
 
-    public boolean checkPermission() {
-        int result = ContextCompat.checkSelfPermission(getApplicationContext(),
-                WRITE_EXTERNAL_STORAGE);
-        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
-                RECORD_AUDIO);
-        return result == PackageManager.PERMISSION_GRANTED &&
-                result1 == PackageManager.PERMISSION_GRANTED;
-    }
 
     public String CreateRandomAudioFileName(int string) {
         StringBuilder stringBuilder = new StringBuilder(string);
@@ -521,7 +511,7 @@ public class MessageActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         stopRepeatingTask();
-       // startActivity(new Intent(MessageActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        // startActivity(new Intent(MessageActivity.this, HomeActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         finish();
 
         mediaPlayer.stop();
@@ -540,6 +530,76 @@ public class MessageActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    private void requestPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                    new String[]{Manifest.permission
+                            .RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MULTIPLE_PERMISSIONS);
+        }
+    }
+
+    public boolean checkPermission() {
+        int result = ContextCompat.checkSelfPermission(getApplicationContext(),
+                WRITE_EXTERNAL_STORAGE);
+        int result1 = ContextCompat.checkSelfPermission(getApplicationContext(),
+                RECORD_AUDIO);
+        return result == PackageManager.PERMISSION_GRANTED &&
+                result1 == PackageManager.PERMISSION_GRANTED;
+    }
+
+    // Function to initiate after permissions are given by user
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+            case MULTIPLE_PERMISSIONS:
+                if (grantResults.length > 0) {
+                    boolean recordPermission = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    boolean writeExternalFile = grantResults[0] == PackageManager.PERMISSION_GRANTED;
+                    if(recordPermission && writeExternalFile)
+                    {
+                        // put your function here
+                        String alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                        Random rnd = new Random();
+                        char chars = alphabet.charAt(rnd.nextInt(alphabet.length()));
+
+
+
+                        Log.e("randomString",""+chars);
+                        AudioSavePathInDevice =
+                                Environment.getExternalStorageDirectory().getAbsolutePath() + "/" +
+                                        "123121"+""+chars+".mp3";
+
+                        MediaRecorderReady();
+
+                        try {
+
+                            mediaRecorder.prepare();
+                            mediaRecorder.start();
+
+
+                        } catch (IllegalStateException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        requestPermissions(
+                                new String[]{Manifest.permission
+                                        .WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO},
+                                MULTIPLE_PERMISSIONS);
+                    }
+                }
+
+        }
+    }
 
 
 }

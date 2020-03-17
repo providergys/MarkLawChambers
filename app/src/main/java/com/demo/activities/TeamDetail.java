@@ -23,16 +23,10 @@ public class TeamDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_team_detail);
 
-        RequestOptions myOptions = new RequestOptions()
-                .override(500, 500);
-        Glide.with(this)
-                .asBitmap()
-                .apply(myOptions)
-                .load(getIntent().getStringExtra("teamImage"))
-                .into(binding.teamImage);
 
 
-      //  Glide.with(getApplicationContext()).load(getIntent().getStringExtra("teamImage")).into(binding.teamImage);
+
+     Glide.with(getApplicationContext()).load(getIntent().getStringExtra("teamImage")).into(binding.teamImage);
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
